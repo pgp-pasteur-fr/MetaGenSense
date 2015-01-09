@@ -1,0 +1,66 @@
+<script type='text/javascript'>
+	function hide_desc(wk_id) {
+		var list = document.getElementsByName("comments");
+		for (i = 0; i < list.length; i++) {
+			if ('desc_'+wk_id == list[i].id) {
+				list[i].style.display='inline';
+			}
+			else{
+				list[i].style.display='none';
+			}
+		}	
+	}
+	
+	function create_field(nb) {
+	nb = parseInt(nb);
+	var opt=""{% for file in  history_content %}+"<option value={{ file.id}} >{{ file.name }}</option>"{% endfor %};
+	
+	var insert=document.getElementById("insert");
+	insert.innerHTML =' ';
+	for (i = 1; i <= nb; i++) {
+		
+		var select=document.createElement("SELECT");
+		select.setAttribute("form", "wklaunchform");
+		select.name = 'inputs';
+		select.innerHTML = opt;
+		
+		insert.appendChild(select);
+		
+		}
+	 }
+	
+</script>
+
+<p>Select your workflow:</p>
+	
+	<ul>
+	<li>
+	<select id="select_workflow" name="workflow_id" onchange="create_field(select.options[this.selectedIndex].getAttribute('nb_input')); hide_desc(this.value);" form="wklaunchform">
+		{% for workflow in workflows %}
+			<option nb_input='{{workflow.nb_input}}' value='{{workflow.id}}' >{{ workflow.name }}</option>
+		{% endfor %}
+	</select>
+	</li>
+	</ul> 
+	{% for workflow in workflows %}
+		<span name=comments id= desc_{{workflow.id}} >
+			{{workflow.comments}}
+		</span>
+	{% endfor %}
+
+
+<p>Select workflow's input(s):</p>
+<ul>
+	<li><div id=insert></div></li>
+	<script>
+		var select = document.getElementById('select_workflow');
+		create_field(select.options[select.selectedIndex].getAttribute('nb_input'));
+		hide_desc(document.getElementById('select_workflow').value);
+	</script> 
+</ul> 
+<form id= 'wklaunchform' action="../launch/" method="post" onsubmit="this.launch_workflow.disabled = true;" >
+	{% csrf_token %}
+	<input type="hidden" name="hist_id" value={{ history_info.id }} />
+	<button type='submit' name="launch_workflow" value="" ><img class="galaxy" src={{ STATIC_URL }}img/logos/logo_GalaxyNoText.png >Launch analysis</button></li>
+</form>
+

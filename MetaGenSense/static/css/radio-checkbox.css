@@ -1,0 +1,26 @@
+label.css-label {
+	background-image:url(images/csscheckbox.png);
+}
+
+input[type=radio].css-checkbox {
+	display:none;
+}
+						
+input[type=radio].css-checkbox + label.css-label {
+	padding-left:27px;
+	height:22px; 
+	display:inline-block;
+	line-height:22px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:22px;
+	vertical-align:middle;
+	cursor:pointer;
+
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+	background-position: 0 -22px;
+
+}
+

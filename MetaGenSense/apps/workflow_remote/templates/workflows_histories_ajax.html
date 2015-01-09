@@ -1,0 +1,11 @@
+{% regroup run_workflow_list by project_id as project_list %}
+	{% for project in project_list %}
+	{{ project.grouper }}
+    <ul>
+        {% for hist in project.list %}
+          <li>{{ hist }}</li>
+    	{% endfor %}
+    </ul>
+   
+{% endfor %}
+	

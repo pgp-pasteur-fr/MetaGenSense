@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+
+{% endblock %}
+
+
+{% block content %}
+<table id=list_samples>
+	<thead>
+		<td><h3>Samples</h3></td>
+		<td><a class=add href="{% url 'sample_add'%}" >New</a></td>
+	</thead>
+	<thead>
+	 <tr>
+	    <th>Id Sample</th>
+	    <th>Reception Date</th>
+	    <th>Country</th>
+	    <th>Host Origin</th>
+	    <th>Sample Origin</th>
+	    <th>Libraries</th>
+	    <th></th>
+  	</tr>
+	</thead>
+    <tbody>
+    {% for sample in samples %}
+    	<tr class="{% cycle 'row1' 'row2' %}">
+    		<td><a href="{% url 'sample_detail' sample.sample_id%}" >{{sample}}</td>
+		    <td>{{sample.reception_date}}</td>
+		    <td>{{sample.location}}</td>
+		    <td>{{sample.host_origin}}</td>
+		    <td>{{sample.sample_origin}}</td>
+		    <td>
+		    {%for lib_prep in sample.librarypreparation_set.all %}
+		    	<a href="{% url 'library_prep_detail' lib_prep.library_id%}">{{lib_prep}}</a>
+			{%endfor%}		    
+		  </td>
+          <td><a class= edit href="{% url 'sample_edit' sample.sample_id%}">Edit</a></td>
+         </tr>
+    {% endfor %}
+    
+	</tbody>
+</table>
+
+{% endblock %}	

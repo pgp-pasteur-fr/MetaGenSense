@@ -1,0 +1,92 @@
+
+img {
+	margin-left: 8px;
+	margin-right: 8px;
+	
+}
+section{
+	background:#fafafa;
+	display: block;
+	width: 100%;
+	box-shadow: 2px 2px 3px 0px #777;
+	padding-bottom: 5px;
+}
+section p{
+	padding: 5px;
+	font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+	color: #5B80B2;
+	
+}
+section li {
+	font-size: 12px;
+	list-style-type: circle;
+}
+
+button {
+ margin-left:5px;
+ box-shadow:1px 1px 1px #C0C0C0;
+ cursor:pointer;
+ padding:3px;
+ border-radius:5px;
+ background-color:#EEEEEE;
+ }
+ 
+button.galaxy{
+ background-color:#EEEEEE;
+ } 
+ 
+img.galaxy, .delete_icon, .view_icon {
+ margin-left: 0px;
+ width: 15px;
+ margin-right: 3px;
+ }
+ 
+img.delete_icon {
+width: 8px;
+margin-right: 4px; 
+ }
+ 
+div.info {
+ margin-top: -8px;
+ display: block;
+ float: left;
+ width: 32px;
+ height: 32px;
+ border: none;
+ background: url("images/info_blue.png");
+ background-repeat: no-repeat;	
+}
+
+#folder{
+ display: block;
+ float: left;
+ width: 16px;
+ height: 16px;
+ border: none;
+ margin-right: 8px;
+ background: url("images/folder.png");
+ background-repeat: no-repeat;	
+}	
+
+.save, .download,.export{
+ display: block;	
+ width: 16px;
+ height: 16px;
+ background-repeat: no-repeat;
+}
+
+.save{	
+ background: url("images/save.png");
+}
+
+.download{
+ background: url("images/download.png");
+}
+
+.export {
+ background: url("images/export.png");
+}
+
+

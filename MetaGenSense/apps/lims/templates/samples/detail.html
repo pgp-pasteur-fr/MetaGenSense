@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+    <link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/jquery.css" media="screen" />
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui.js"></script>
+
+<script type="text/javascript"> 
+	$('document').ready(function(){
+		$('#consult_table').find('*').attr('readonly', true);		
+		$('document')l.datepicker();
+		$('#id_reception_date').datepicker();
+		
+	}); </script>
+   
+{% endblock %}
+
+{% block content %}
+
+<span id=tilte><h3>Sample {{sample}}</h3></span><a href="{%url 'sample_add' %}" >New Sample</a>
+
+<table id='consult_table' >
+	{{ sample_form }}
+	{{location_form}}
+	{{gps_form}}
+</table>	
+
+<script type="text/javascript"> 
+	$('#consult_table').find('*').attr('readonly', true);
+</script>
+
+<div id=nav_bar >
+<li><a href="{%url 'project_sample_list' current_project %}" >Back </a></li>
+<li><a href="{%url 'sample_edit' sample.sample_id %}">Edit {{ sample.sample_id }}</a></li>
+<li><a href="{%url 'library_prep_add' %}">New Library prep</a></li>
+</div>
+
+{% endblock %}

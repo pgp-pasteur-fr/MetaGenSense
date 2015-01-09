@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{%block stylesheet %}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/profile.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+	
+	
+	
+{% endblock %}
+
+{% block content %}
+<h3>Workflows</h3>
+	<section>
+		<p>Workflows for Single read analysis:</p>
+		<ul>
+		<li>Workflow_SE with pre-fixed options 
+				<select id="ListeElement">
+			   <option value="valeur1">choose sample</option>
+			   <option value="valeur2">Option 2</option>
+			   <option value="valeur3">Option 3</option>
+			   </select>
+			 
+			 
+		<button>Launch analysis</button></li>
+		<li>Workflow_SE with editable options
+		
+			 <button><img class="galaxy" src={{ STATIC_URL }}img/logos/logo_GalaxyNoText.png >Open in Galaxy</button>
+		</ul>
+	
+	
+	</section>
+	<section>
+		<p>Workflows for Paired end analysis:</p>
+
+		<ul>
+		<li>Workflow_PE with pre-fixed options 
+				<select id="ListeElement">
+			   <option value="valeur1">choose Read 1</option>
+			   <option value="valeur2">Option 2</option>
+			   <option value="valeur3">Option 3</option>
+			   </select>
+			 	<select id="ListeElement">
+			   <option value="valeur1">choose Read 2</option>
+			   <option value="valeur2">Option 2</option>
+			   <option value="valeur3">Option 3</option>
+			   </select>
+			 
+		<button>Launch analysis</button></li>
+		<li>Workflow_PE with editable options
+		
+			 <button><img class="galaxy" src={{ STATIC_URL }}img/logos/logo_GalaxyNoText.png >Open in Galaxy</button>
+		</ul>
+	
+	
+	</section>
+{% endblock %}	

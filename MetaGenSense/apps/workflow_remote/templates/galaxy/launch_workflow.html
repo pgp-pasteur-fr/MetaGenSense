@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{%block stylesheet %}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/profile.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/status.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+
+	
+{% endblock %}
+
+{% block content %}
+<h3>Workflows</h3>
+	{% if messages %}
+	{% for message in messages %}
+		{% ifequal message.tags|stringformat:"s" 'warning' %}
+		<ul class="messages">    
+	    	<li class="{{ message.tags }}"><h3>{{ message }}</h3></li>
+		</ul>
+		{% endifequal %}
+	{% endfor %}
+	{% endif %}
+	<section>
+		{% include "galaxy/includes/history_detail.html" %}
+	</section>
+
+	<section>
+		{% include "galaxy/includes/select_workflows.html" %}
+	</section>
+	
+	
+	
+	
+{% endblock %}	

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+	
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+	
+{% endblock %}
+{% block content %}
+<h3>Your file has been uploaded.</h3>
+<p>{{file_uploaded}}</p>
+
+	{%if send_to_galaxy %}
+	<form action='https://galaxy.web.pasteur.fr/' enctype="multipart/form-data" method="post">
+		{% csrf_token %}
+		<input type="submit" value="send to galaxy" />
+		{% endif %}
+	</form>
+{% endblock %}

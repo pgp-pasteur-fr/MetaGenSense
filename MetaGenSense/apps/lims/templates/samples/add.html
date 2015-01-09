@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+    <link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/jquery.css" media="screen" />
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui.js"></script>
+
+<script type="text/javascript"> 
+	$('document').ready(function(){
+		$('#id_creation_date').datepicker();
+		$('#id_reception_date').datepicker();
+		$('#id_sampling_date').datepicker();
+	}); </script>
+   
+{% endblock %}
+
+
+{% block content %}
+
+ <form action='' enctype="multipart/form-data" method="post">
+	<div style="display:table-cell;">
+		
+		<fieldset>
+			<legend>Sample informations</legend>
+			<table>
+			  {{ sample_form }} {% csrf_token %}
+			</table>
+	    </fieldset>
+    	
+	</div>
+	<div style="display:table-cell; float:rigth;">
+		
+		<fieldset>
+		<legend>Geographique Location</legend>
+			<table>
+	  		{{location_form}} {% csrf_token %}
+	  		</table>
+		<legend>Gps Coords</legend>
+			<table>
+	    	{{gps_form}} {% csrf_token %}
+	 	 	</table> 
+	 </fieldset>
+	</div>
+	
+	<input type="submit" value="Save" />
+</form>
+
+{% endblock %}	

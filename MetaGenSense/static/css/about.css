@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+#about{ 
+	
+	bottom: 0;
+	padding:20px;
+	background: #eff2fd ;
+	min-height: 480px;
+	
+}
+#about p{ 
+	
+	padding: 12px;
+	font-family: Verdana,'Helvetica', Arial, sans-serif;
+	font-size:16px; 
+	border:1px solid #008db8 ;
+	box-shadow: 3px 3px 5px 0px #008db8;
+	background: #b2dce9 ;
+	text-align: center;
+}
+
+
+#about section{
+	background:#cccccc;
+	display: inline-flex;
+	width: 100%;
+	box-shadow: 3px 3px 5px 0px #777;
+}
+
+#about a {
+	border-left:2px solid  #cccccc;
+	background:#fff;
+	display: inline-block;
+	color: #fff;
+	margin: 2px auto;
+
+}
+
+#about a img{
+	display:block;
+	background-repeat: no-repeat;
+	background-position: center ;
+	height: auto;
+	
+}
+
+#about a img.cea {	
+	width:100px;
+	padding-top:5px;
+	}
+	
+#about a img.pgp {	
+	width:150px;
+	
+	}
+	
+#about a img.pasteur {	
+	
+	width: 125px;
+	padding:10px;
+	
+	}
+	
+#about a img.pathoquest {
+	width: auto;
+	
+	
+}

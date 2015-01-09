@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{%block stylesheet %}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/profile.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />	
+{% endblock %}
+
+{% block content %}
+<h3>Workflows</h3>
+	<section>
+	
+		<ul>
+			 <button  onclick="location.href='galaxy';" ><img class="galaxy" src={{ STATIC_URL }}img/logos/logo_GalaxyNoText.png >Workflow with galaxy</button>
+		</ul>
+
+{% endblock %}	

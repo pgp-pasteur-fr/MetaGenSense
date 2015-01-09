@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+    <link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/jquery.css" media="screen" />
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui.js"></script>
+	
+	
+	
+<script type="text/javascript"> 
+	$('document').ready(function(){
+		$('#id_creation_date').datepicker();
+		$('#id_reception_date').datepicker();
+		$( "#extra").hide();
+ 
+	}); </script>
+   
+{% endblock %}
+
+
+{% block content %}
+
+<fieldset id=quick>
+<legend>Quick analysis</legend>
+<form action='' enctype="multipart/form-data" method="post">
+  <table>{{ quick_analysis}} {% csrf_token %}</table>
+  <br>
+  <input type="submit" value="Save" />
+  <input type="submit" value="Load in Galaxy" />
+</form>
+</fieldset>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<title>MetaGenSense</title>
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/base.css" media="screen, print" />
+	{%block stylesheet %} {% endblock %}
+	
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+	
+		<header id="header" onclick="location.href={% url 'home' %}">
+			<span id=blue>M</span>eta<span id=orange>G</span>en<span id=green>S</span>ense
+		</header>
+		<ul id=connection>
+					<li class=user>
+					{%if user.is_authenticated %}
+						<a href ="/logout/">Logout</a>
+					</li>
+					<li class=user>	
+						<a href ="">{{user}}</a>
+					{% else %}
+						<a href ='/login/'>Login</a>
+					{% endif %}
+					</li>
+		</ul>
+		<div id=BFC style="display:table; width: 100%;">
+		
+			<nav id="nav-top">
+				<ul>
+					<li><a class= home href="{% url 'home' %}">HOME</a></li>
+					{% comment %}
+					<li><a href="/WIP">TOOLS</a>
+						<ul>
+							<li><a href="/quick_analysis/">Quick Analysis</a></li>
+							<li><a href="/upload/">Upload File</a></li>
+							<li><a href="/WIP">----</a></li>
+						</ul>
+						</li>
+					{% endcomment %}
+				</ul>
+			</nav>
+		<div id="container-main">	
+			<aside id="menu-left">
+				<ul>
+				<li>
+					<div id=current_project>
+					<h3>
+					{% if current_project %}
+					<span id=cur_project onclick="location.href='{% url 'project_detail' current_project %}';">
+						{{ current_project }}
+					{%else%}
+					<span id=cur_project onclick="location.href='{% url 'project_list' %}';">
+					<h6 id='no_project'>Select a Project<h6>
+					{% endif %}
+					</span></h3>
+					</div>
+				</li>
+				<li><a href="{% url 'project_list' %}">Projects</a></li>
+				<li><a href="{% url 'lims' %}">LIMS</a></li>
+				<li><a href="{% url 'workflows'%}">Workflows</a></li>
+				<li><a href="{% url 'analyse' %}">Analyse</a></li>
+				<li><a href="{% url 'about' %}">About</a></li>
+				<li></li>
+					
+				</ul>
+				
+			</aside>
+			<div id="content">
+				{% block content %}
+				{% endblock content %}
+			</div>
+		</div>
+		<footer id="footer">
+			{% block footer %}{% endblock footer %}
+			<span class=copyright>2014</span>
+		</footer>
+		</div>
+</body>
+</html> 

@@ -1,0 +1,251 @@
+@CHARSET "utf-8";
+
+
+#nav_bar li {	
+	display:inline-block;
+	padding:0;
+	margin-right:20px;
+	margin-top:20px;
+	padding:5px;
+	background:#eee;
+	border-radius: 5px;
+	box-shadow:2px 2px 2px;
+	
+}
+#nav_bar li:hover {	
+
+	box-shadow:2px 2px 2px inset;
+	
+}
+
+#nav_bar li a{
+	display:block;
+	color:#000;
+	height:inherit;
+	line-height:20px;
+	font-size:14px;
+	text-align:center;
+	text-decoration:none;
+
+}
+
+a.add{
+	text-decoration: none;
+	background-color: inherit;
+	padding: 0 5px 5px 24px;
+	background-image: url('images/icon-add.png');
+	background-repeat: no-repeat;
+	margin-left: 20px;
+}
+
+a.edit{
+	text-decoration: none;
+	background-color: inherit;
+	padding-left: 18px;
+	background-image: url('images/icon-edit.png');
+	background-repeat: no-repeat;
+}
+
+a.look{
+	margin-left: 5px;
+	text-decoration: none;
+	background-color: inherit;
+	padding-left: 18px;
+	background-image: url('images/icon-look.png');
+	background-repeat: no-repeat;
+}
+a.download{
+	margin-left: 5px;
+	text-decoration: none;
+	background-color: inherit;
+	padding-left: 18px;
+	background-image: url("images/download.svg");
+	background-repeat: no-repeat;
+	 
+}
+
+a.delete{
+	margin-left: 5px;
+	text-decoration: none;
+	background-color: inherit;
+	padding-left: 18px;
+	background-image: url("images/icon-delete.svg");
+	background-repeat: no-repeat;
+	 
+}
+
+
+#title{
+	display:inline-block;	
+}
+
+/* TABLES ADMIN*/
+
+table {
+    border-collapse: collapse;
+    border-color: #ccc;
+    width: 100%;
+}
+
+td, th {
+    
+    border-bottom: 1px solid #eee;
+    padding: 3px;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: 14px;
+}
+
+th {
+    text-align: left;
+    font-weight: bold;
+}
+
+thead th {
+    color: #666;
+    padding: 2px 5px;
+    font-size: 14px;
+    background: #e1e1e1;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+tfoot td {
+    border-bottom: none;
+    border-top: 1px solid #ddd;
+}
+
+thead th:first-child,
+tfoot td:first-child {
+    border-left: none !important;
+}
+
+thead th.optional {
+    font-weight: normal !important;
+}
+
+fieldset table {
+    border-right: 1px solid #eee;
+}
+
+tr.row-label td {
+    font-size: 9px;
+    padding-top: 2px;
+    padding-bottom: 0;
+    border-bottom: none;
+    color: #666;
+    margin-top: -1px;
+}
+
+tr.alt {
+    background: #f6f6f6;
+}
+
+.row1 {
+    background: #D4E8EC;
+}
+
+.row2 {
+    background: transparent;
+}
+
+/* SORTABLE TABLES */
+
+thead th {
+    padding: 2px 5px;
+    line-height: normal;
+}
+
+thead th a:link, thead th a:visited {
+    color: #666;
+}
+
+thead th.sorted {
+    background: #c5c5c5 url(../img/nav-bg-selected.gif) top left repeat-x;
+}
+
+thead th.sorted .text {
+	padding-right: 42px;
+}
+
+table thead th .text span {
+    padding: 2px 5px;
+    display:block;
+}
+
+table thead th .text a {
+    display: block;
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+table thead th.sortable:hover {
+    background: white url(../img/nav-bg-reverse.gif) 0 -5px repeat-x;
+}
+
+thead th.sorted a.sortremove {
+    visibility: hidden;
+}
+
+table thead th.sorted:hover a.sortremove {
+    visibility: visible;
+}
+
+table thead th.sorted .sortoptions {
+    display: block;
+    padding: 4px 5px 0 5px;
+    float: right;
+    text-align: right;
+}
+
+table thead th.sorted .sortpriority {
+    font-size: .8em;
+    min-width: 12px;
+    text-align: center;
+    vertical-align: top;
+}
+
+table thead th.sorted .sortoptions a {
+    width: 14px;
+    height: 12px;
+    display: inline-block;
+}
+
+table thead th.sorted .sortoptions a.sortremove {
+    background: url(../img/sorting-icons.gif) -4px -5px no-repeat;
+}
+
+table thead th.sorted .sortoptions a.sortremove:hover {
+    background: url(../img/sorting-icons.gif) -4px -27px no-repeat;
+}
+
+table thead th.sorted .sortoptions a.ascending {
+    background: url(../img/sorting-icons.gif) -5px -50px no-repeat;
+}
+
+table thead th.sorted .sortoptions a.ascending:hover {
+    background: url(../img/sorting-icons.gif) -5px -72px no-repeat;
+}
+
+table thead th.sorted .sortoptions a.descending {
+    background: url(../img/sorting-icons.gif) -5px -94px no-repeat;
+}
+
+table thead th.sorted .sortoptions a.descending:hover {
+    background: url(../img/sorting-icons.gif) -5px -115px no-repeat;
+}
+
+/* ORDERABLE TABLES */
+
+table.orderable tbody tr td:hover {
+    cursor: move;
+}
+
+table.orderable tbody tr td:first-child {
+    padding-left: 14px;
+    background-image: url(../img/nav-bg-grabber.gif);
+    background-repeat: repeat-y;
+}
+
+table.orderable-initalized .order-cell, body>tr>td.order-cell {
+    display: none;
+}

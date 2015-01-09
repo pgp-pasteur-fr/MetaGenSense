@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/radio-checkbox.css" media="screen" />
+	<script>
+		
+		var request = null;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			request=new XMLHttpRequest();
+		  }
+		else{// code for IE6, IE5
+			request=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		
+	    function getCookie(c_name){
+	       if (document.cookie.length > 0)
+	        {
+	            c_start = document.cookie.indexOf(c_name + "=");
+	            if (c_start != -1)
+	            {
+	                c_start = c_start + c_name.length + 1;
+	                c_end = document.cookie.indexOf(";", c_start);
+	                if (c_end == -1) c_end = document.cookie.length;
+	                return unescape(document.cookie.substring(c_start,c_end));
+	            }
+	        }
+	        return "";
+	     }
+	    
+		function selectCurrentProject(radio){			
+			return getSelectValue(radio.value);
+		}
+		
+		function getSelectValue(selectValue){
+				/**On récupère l'élement html <select>**/
+				/**selectElmt.options correspond au tableau des balises <option> du select
+				selectElmt.selectedIndex correspond à l'index du tableau options qui est actuellement sélectionné
+				**/
+				var url = "{% url 'project_list' %}";
+				
+				request = new XMLHttpRequest();
+				request.open('POST',url, false);
+				request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				request.setRequestHeader('X-Requested-With','XMLHttpRequest');/** pour utiliser la fct 'is_ajax' de Django **/
+				
+				request.onreadystatechange = actualiserCurrentProject;
+				request.send("select_project="+selectValue+
+						     "&csrfmiddlewaretoken="+getCookie("csrftoken"));
+			}
+		
+		function actualiserCurrentProject() {
+			if (request.readyState == 4) {
+				var cur_project = request.responseText;
+				var selectElmt = document.getElementById('cur_project').innerHTML = cur_project;
+				selectElmt.value = cur_project;
+				
+			}
+		}
+		
+	</script>
+{% endblock %}
+
+{% block content %}
+<h2>Projects</h2>
+	<ul>
+	{{projects_list.count}} project(s) are subscribed
+	</ul>
+	<ul style="list-style:none">
+		{% for project in projects_list %}
+		<li>
+			<input id={{ project.id }} type="radio" class="css-checkbox" name="project" value="{{ project }}" 	 
+			{% ifequal current_project project.name %}checked="checked"{% endifequal %} onchange="selectCurrentProject(this)" >
+			<label for="{{ project.id }}" class="css-label"></label>
+			<a style="text-decoration:none" href="{% url 'project_detail'  project  %}" >{{ project }}</a>	
+		</li>
+		{% endfor %}
+	</ul>
+	<button onclick=location.href='add'; >New Project</button>
+{% endblock %}
+
+
+
