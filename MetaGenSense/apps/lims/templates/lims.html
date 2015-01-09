@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/lims.css" media="screen" />
+{% endblock %}	
+{% block content %}
+ <div id='navbox'>
+				<ul class=sample>
+					<li>						
+						<a href="{% url 'project_sample_list' project=current_project %}">Samples</a>
+					</li>
+					<li>
+						<a class=add href="{% url 'sample_add' %}">add Sample</a>
+					</li>
+				</ul>
+				<ul class=libprep>
+					<li>
+						<a href="{% url 'project_library_prep_list' project=current_project %}">Library Prep</a>
+					</li>
+					<li>
+						<a class=add href="{% url 'library_prep_add' %}" >add Library</a>
+					</li>
+				</ul>
+				<ul class=run>		
+					<li>
+						<a href="{% url 'project_run_list' project=current_project %}">Run</a>
+					</li>
+					<li>
+						<a class=add href="{% url 'run_add' %}">add Run</a>
+					</li>
+				</ul>
+				<ul class=rawdata>	
+					<li>
+						<a href="{% url 'project_raw_data_list' project=current_project %}">Raw data</a>
+					<li>
+					<li>
+						<a class=add href="{% url 'raw_data_add' %}">add raw data</a>
+					</li>
+				</ul>
+				
+</div>
+{% endblock %}	

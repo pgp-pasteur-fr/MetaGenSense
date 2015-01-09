@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+	{%block stylesheet %}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/profile.css" media="screen" />
+		
+		<script type="text/javascript">
+	
+		function create_request(url, asc){
+
+			var request = null;
+			if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari 
+				request = new XMLHttpRequest();}
+			else{// code for IE6, IE5
+				request=new ActiveXObject("Microsoft.XMLHTTP");}
+			
+			request.open('POST',url, asc );
+			request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			request.setRequestHeader('X-Requested-With','XMLHttpRequest');/**to use 'is_ajax' Django fct**/
+			return request;
+		}		
+		
+	    function getCookie(c_name)
+	    { if (document.cookie.length > 0)
+	        { c_start = document.cookie.indexOf(c_name + "=");
+	            if (c_start != -1)
+	            {   c_start = c_start + c_name.length + 1;
+	                c_end = document.cookie.indexOf(";", c_start);
+	                if (c_end == -1) c_end = document.cookie.length;
+	                return unescape(document.cookie.substring(c_start,c_end));
+	            }
+	        } return "";
+	     }
+	    
+	    var samples_request = null;
+	    function get_sample_list()
+		{
+			var url = "{% url 'sample_list'%}";
+			samples_request = create_request(url, false); /**synchrone pour laisser galaxy repondre**/
+			samples_request.onreadystatechange = refresh_samples;
+			samples_request.send("&csrfmiddlewaretoken="+getCookie("csrftoken"));
+		}
+	   function refresh_samples() {
+		if (samples_request.readyState == 4) {
+			var reponse = samples_request.responseText;
+			var selectElmt = document.getElementById('samples').innerHTML = reponse;
+				}
+		  	}
+	
+	    var dataset_request = null;
+	    function get_dataset()
+		{
+			var url = "{% url 'run_workflow_list' %}";
+			dataset_request = create_request(url, false); /**synchrone pour laisser galaxy repondre**/
+			dataset_request.onreadystatechange = refresh_dataset;
+			dataset_request.send("&csrfmiddlewaretoken="+getCookie("csrftoken"));
+		}
+		function refresh_dataset() {
+			if (dataset_request.readyState == 4) {
+				var reponse = dataset_request.responseText;
+				var selectElmt = document.getElementById('dataset').innerHTML = reponse;
+					}
+		 	}
+	   </script>
+	
+	{% endblock %}
+
+{% block content %}
+<h3>Welcome to your personal page {{user}}</h3>
+
+<section>
+		<p>Previous samples</p>
+		<div id=samples >
+		<script type="text/javascript">
+			get_sample_list();
+		</script>
+		
+		</div>
+</section>
+
+<section>
+		<p>Previous Worflows</p>
+		<div id=dataset >
+		<script type="text/javascript">
+			get_dataset();
+		</script>
+		</div>
+</section>
+
+
+{% endblock %}
+
+
+
+
+

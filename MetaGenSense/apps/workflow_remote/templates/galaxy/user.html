@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+	{%block stylesheet %}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/profile.css" media="screen" />	
+	{% endblock %}
+
+{% block content %}
+<h3>Welcome Galaxy User</h3>
+	<div class=info></div>Please to set up your API Key (see the Galaxy docs to generate an API Key )
+	<section>
+	<form action="" method="post">{% csrf_token %}
+	    {{ form.as_p }}
+	   	<button type="submit" value="Update" />Update</button>
+	</form>
+	{% if messages %}
+		<ul class="messages">
+    	{% for message in messages %}
+    		{{ message }}
+    	{% endfor %}
+		</ul>
+	{% endif %}		
+	</section>
+	
+
+{% endblock %}
+
+
+
+
+

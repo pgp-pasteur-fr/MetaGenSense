@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+
+{% endblock %}
+
+
+{% block content %}
+<table id=list_samples>
+	<thead>
+		<td><h3>Run</h3></td>
+		<td><a class=add href="{% url 'run_add' %}" >New</a></td>
+	</thead>
+	<thead>
+	 <tr>
+	    <th>Id Run</th>
+	    <th>Date</th>
+	    <th>Device</th>
+	    <th>Technique</th>
+	    <th>Theorical Read Length</th>
+	    <th>Multiplex</th>
+	    <th>Nb sample multiplex</th>
+	    <th></th>
+  	</tr>
+	</thead>
+    <tbody>
+    {% for run in runs %}
+    	<tr class="{% cycle 'row1' 'row2' %}">
+    		<td><a href="{% url 'run_detail' run.run_id %}">{{run.run_id}}</a></td>
+		    <td>{{run.date}}</td>
+		    <td>{{run.device}}</td>
+		    <td>{% if run.single_end%}
+		    		Single end
+		    	{% elif run.paired_end%}
+		    		Paired end
+		    	{%endif%}
+		    {% if run.mate_pair%}
+		   		/ Mate pair
+		   	{%endif%}	
+		    </td>
+		    <td>{{run.theoretical_read_length}}</td>
+		    <td>{{run.multiplex}}</td>
+		    <td>{{run.nb_sample_multiplex}}</td>
+		    
+            <td><a class=edit href="{% url 'run_edit' run.run_id %}">Edit</a></td>
+         </tr>
+    {% endfor %}
+    
+	</tbody>
+</table>
+
+{% endblock %}	

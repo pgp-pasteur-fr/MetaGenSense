@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+
+{% endblock %}
+
+{% block content %}
+
+
+<section>
+<h3>{{project}}</h3>
+<p>Date: {{project.date}}</p>
+<p>Context: {{project.context}}</p>
+<p>Comment: {{project.comments}}</p>
+
+Subscribers:
+<ul>{% for user in project.subscribers.all%}
+<li>{{user.first_name}} ,
+	{{user.last_name}}</li>
+{% endfor%}	
+</ul>
+
+
+</section> 
+<section>
+<h3>Samples of {{project}} </h3>
+
+<table>
+  <tr>
+    <th>Id Sample</th>
+    <th>Date</th>
+    <th>Country</th>
+    <th>Host Origin</th>
+    <th>Sample Origin</th>
+    <th>Library</th>	
+  </tr>
+  {% for sample in samples_list %}
+  <tr>
+    <td><a href="{% url 'sample_detail' sample.sample_id%}" >{{ sample.sample_id }}</a></td>
+    <td>{{sample.creation_date}}</td>
+    <td>{{sample.location}}</td>
+    <td>{{sample.host_origin}}</td>
+    <td>{{sample.sample_origin}}</td>
+    <td>{% for lib in sample.librarypreparation_set.all %}
+   		<a href="{% url 'library_prep_detail' lib %}">{{lib}}</a> 
+   		{% endfor %}
+   	</td>
+   </tr>
+  {% endfor %}
+  
+</table>
+</section>
+
+
+{% endblock %}	

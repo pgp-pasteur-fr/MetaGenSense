@@ -1,0 +1,40 @@
+@CHARSET "utf-8";
+
+.stat_ok, .stat_inprogress, .stat_running , .stat_error, .stat_queued {
+
+    text-shadow: 0 1px 0 #FFFFFF;
+	margin-left: 8px;
+    margin-right: 8px;	
+	height: 16px;
+	width: 16px;
+	
+
+    
+}
+.stat_running{
+	background: url( ../img/progress.gif)  no-repeat center; 
+}
+ 
+.stat_queued  {
+	 background: url( ../img/icon_clock.gif)  no-repeat center; 
+}
+
+.stat_ok {
+	 background: url( ../img/icon_success.gif)  no-repeat center;
+}
+
+.stat_error {
+	 background: url( ../img/icon_deletelink.gif)  no-repeat center; 
+}
+.stat_paused {
+	 background: url( ../img/nav_pause.gif)  no-repeat center; 
+}
+
+td {
+    border-bottom: 1px solid #EEEEEE;
+    font-family: "Lucida Grande",Verdana,Arial,sans-serif;
+    padding: 2px;
+    padding-left: 5px;
+    
+}
+

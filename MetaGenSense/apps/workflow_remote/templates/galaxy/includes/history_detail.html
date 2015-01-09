@@ -1,0 +1,29 @@
+<p>History: {{ history_info.name }}</p>
+	<table>
+	  <thead>
+	  	<th>Step</th>
+	    <th>File Name</th>
+	    <th>Statut</th>
+	    <th colspan="4"></th>
+
+	  </thead>
+	
+	{% for file in  history_content %}
+  	  <tr class="{% cycle 'row1' 'row2' %}">
+  	  	<td>{{forloop.counter}}.</td>
+    	<td>{{ file.name }}</td><td class="stat_{{file.status}}"> </td>
+ 	  	<td>{%if 'ok' in file.status %}<a title="Export big data in your personal sbw_outputs folder " class=export href="{% url 'galaxy_export_output' file.id %}"{{file.id}}> </a>{% endif %}</td>
+  	  	<td>{%if 'ok' in file.status %}<a title="Dowload the file" class=download href="{% url 'galaxy_download_file' file.id %}" > </a>{% endif %}</td>
+  	  	<td>{%if 'ok' in file.status %}<a title="Save the file in the database and shared with project group" href="{% url 'galaxy_save_file' file.id %}" class=save ></a>{% endif %}</td>
+  	  	<td>{% if messages %}
+  	  	
+    	{% for message in messages %}
+   	 	{% if message|stringformat:"s" in file.id|stringformat:"s" %}<a title="Consult the saved file" href="{% url 'analyse' %}" >consult</a> {% endif  %}</td>
+    	{% endfor %}
+		{% endif %}
+		</td>
+   	  </tr>
+	 {% endfor %}
+
+	 
+	</table>

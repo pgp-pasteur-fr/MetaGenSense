@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+
+{% endblock %}
+{% block content %}
+<form action='' enctype="multipart/form-data" method="post">
+<fieldset>
+{% if code_error != 0 %}
+	{{error_msg}}
+{% endif %}	
+
+<legend>Upload</legend>
+  {{ upload_readform.as_p }} {% csrf_token %}
+  <input type="submit" value="Enregistrer" />
+</fieldset>
+
+{% endblock %}

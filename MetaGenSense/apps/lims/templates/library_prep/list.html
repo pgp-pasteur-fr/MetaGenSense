@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+  
+{% endblock %}
+
+
+{% block content %}
+<table id=list_lib_prep>
+	<thead>
+		<td><h3>Libraries</h3></td>
+		<td><a class=add href="{% url 'library_prep_add'%}" >New</a></td>
+	</thead>
+	<thead>
+	 <tr>
+		<th>Id</th>
+	    <th>Sample</th>
+		<th>Date</th>
+		<th>Library Protocol</th>
+		<th>Run</th>
+		<th>Comments</th>
+		<th></th>
+  	</tr>
+	</thead>
+    <tbody>
+    {% for lib in libraries  %}
+    	<tr class="{% cycle 'row1' 'row2' %}">
+     		<td><a href="{% url 'library_prep_detail' lib.library_id %}" >{{lib.library_id}}</td>
+     		<td><a href="{% url 'sample_detail' lib.sample %}">{{lib.sample}}</a></td>
+     		<td>{{lib.date}}</td>
+     		<td>{{lib.library_protocol}}</td>
+     		<td>{% if lib.run == None %}<a class=add href="{% url 'run_add'%}">add</a>{%else%}<a href="{% url 'run_detail' lib.run %}">{{lib.run}}</a>{%endif%}</td>
+     		<td>{{lib.comments}}</td>
+     		<td><a class=edit href="{% url 'library_prep_edit' lib.library_id %}" >edit</a></td>
+		</tr>
+	{%endfor%}
+	</tbody>
+</table>
+
+
+
+{% endblock %}	

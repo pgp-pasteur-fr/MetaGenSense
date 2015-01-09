@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+{% endblock %}
+
+{% block content %}
+<h2>Data Files</h2>
+    {% regroup files|dictsort:"id_run_wf.name" by id_run_wf.name as list_files %}
+  
+	<ul style="list-style:none">
+	{% for element in list_files %}
+	<h4>{{ element.grouper }}</h4>
+	
+		{% for file in element.list %}
+
+		<div id={{ file.id }}>{{file}}
+				{%if file.data.file_path %}
+					<a class=look title='open file in web browser page' href="{% url 'analyse_file_display' current_project file.data.id %}"></a>
+					<a class=download title="download file" href="{% url 'analyse_file_download' current_project file.data.id %}"></a>
+					<a class=delete title="Delele file"href="{% url 'file_info_confirm_delete' current_project file.data.id %}"></a>
+				{%else%}
+					{%if file.input %}
+					<span><small><i>input</i></small></span>
+					{% endif %}
+				{% endif %}
+		</div>
+		{% endfor %}
+	{% endfor %}
+	</ul>
+	
+		
+	<ul><h4>File(s) into your Personal export folder :</h4>
+		{% for mfile in personal_export_files %}
+		
+		  {{ mfile}}
+
+		{% endfor %}
+	</ul>
+
+{% endblock %}
+

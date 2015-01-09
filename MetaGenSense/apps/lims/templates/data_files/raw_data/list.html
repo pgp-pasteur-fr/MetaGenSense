@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+  
+{% endblock %}
+
+
+{% block content %}
+<table id=list_lib_prep>
+	<thead>
+		<td><h3>Raw Data</h3></td>
+		<td><a class=add href="{% url 'raw_data_add'%}" >New</a></td>
+	</thead>
+	<thead>
+	 <tr>
+	 	<th>Name</th>
+		<th>Library Protocol</th>
+		<th>Comments</th>
+		<th></th>
+  	</tr>
+	</thead>
+    <tbody>
+    {% for raw_data in raw_data_list  %}
+    	<tr class="{% cycle 'row1' 'row2' %}">
+     		<td><a href="{% url 'raw_data_detail' raw_data.pk %}" >{{raw_data.raw_data_file.name}}</td>
+     		<td>{{raw_data.library_preparation}}</td>
+       		<td>{{raw_data.comments}}</td>
+     		<td><a class=edit href="{% url 'raw_data_edit' raw_data.pk  %}" >edit</a></td>
+		</tr>
+	{%endfor%}
+	</tbody>
+</table>
+
+
+
+{% endblock%}

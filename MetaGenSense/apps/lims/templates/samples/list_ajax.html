@@ -1,0 +1,11 @@
+{% regroup samples by project as project_list %}
+	
+{% for project in project_list %}
+	{{ project.grouper }}
+    <ul>
+        {% for sample in project.list %}
+          <li>{{ sample }}</li>
+    	{% endfor %}
+    </ul>
+    
+{% endfor %}

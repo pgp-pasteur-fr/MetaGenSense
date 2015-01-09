@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{%block stylesheet %}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/profile.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/histories.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<!--link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" /-->
+	
+	<script type="text/javascript">
+	
+		function create_request(url, asc){
+
+			var request = null;
+			if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari 
+				request = new XMLHttpRequest();}
+			else{// code for IE6, IE5
+				request=new ActiveXObject("Microsoft.XMLHTTP");}
+			
+			request.open('POST',url, asc );
+			request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			request.setRequestHeader('X-Requested-With','XMLHttpRequest');/**to use 'is_ajax' Django fct**/
+			return request;
+		}		
+		
+	    function getCookie(c_name)
+	    {
+	        if (document.cookie.length > 0)
+	        {
+	            c_start = document.cookie.indexOf(c_name + "=");
+	            if (c_start != -1)
+	            {
+	                c_start = c_start + c_name.length + 1;
+	                c_end = document.cookie.indexOf(";", c_start);
+	                if (c_end == -1) c_end = document.cookie.length;
+	                return unescape(document.cookie.substring(c_start,c_end));
+	            }
+	        }
+	        return "";
+	     }
+	    
+	    var dataset_request = null;
+	    function get_dataset()
+		{
+			var url = "{% url 'galaxy_dataset' %}";
+			dataset_request = create_request(url, false); /**synchrone pour laisser galaxy repondre**/
+			dataset_request.onreadystatechange = refresh_dataset;
+			dataset_request.send("&csrfmiddlewaretoken="+getCookie("csrftoken"));
+		}
+	    
+	    var import_request = null;
+	    function import_new_file()
+		{
+			var wait = document.getElementById('wait_id').innerHTML = "<img src='{{STATIC_URL}}/img/139092976421.gif' />Loading please wait...";
+			var url = "{% url 'import_galaxydir' %}";
+			import_request = create_request(url,true);
+			import_request.onreadystatechange = refresh_import_new_files;
+			import_request.send("&csrfmiddlewaretoken="+getCookie("csrftoken"));
+		}
+	    
+	   function refresh_import_new_files() {
+		 if (import_request.readyState == 4) {
+			var reponse = import_request.responseText;
+			var selectElmt = document.getElementById('dataset').innerHTML = reponse;
+			var wait = document.getElementById('wait_id').innerHTML = " ";
+				}
+	  		}
+	   
+	   function refresh_dataset() {
+		if (dataset_request.readyState == 4) {
+			var reponse = dataset_request.responseText;
+			var selectElmt = document.getElementById('dataset').innerHTML = reponse;
+				}
+		  	}
+	  
+	    </script>	
+	
+{% endblock %}
+
+{% block content %}
+<h3>Workflows<div style="float:right;"><a title="change the account galaxy api key"  href="account"><img src="/static/css/images/setting.png"></a></div></h3>
+	
+	{% if messages %}
+		{% for message in messages %}
+			{% ifequal message.tags|stringformat:"s" 'warning' %}
+			<ul class="messages">    
+	    		<li class="{{ message.tags }}"><h4>{{ message }}</h4></li>
+			</ul>
+			{% endifequal %}
+		{% endfor %}
+	{% endif %}
+	
+	<section id=histories>
+		{% include "galaxy/includes/histories.html" %}
+	</section>
+	
+	<section id=sect_dataset>
+		<form action="" method="POST">
+			{% csrf_token %}
+			<div id=dataset >
+				{{message}}
+			</div>
+				<script type="text/javascript">
+						get_dataset();
+				</script>
+			<button type="submit" value="Create new history">Create new history</button>
+			<input type=button name=newhistoryname value="add suffix" onclick="this.type='text'; this.value='';">
+		</form>
+	</section>
+	
+	<section><p>Put new files into Galaxy from 'Links' repository</p>
+		<div id=wait_id></div>
+		<button id=import_btn onclick="this.disabled=true; import_new_file();">Import new files</button>
+		<div id=imported_filed></div>
+	</section>
+	
+	
+{% endblock %}	

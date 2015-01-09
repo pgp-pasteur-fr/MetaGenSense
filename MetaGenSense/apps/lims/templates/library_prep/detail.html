@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+    <link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/jquery.css" media="screen" />
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.9.1.js"></script>
+{% endblock %}
+
+{% block content %}
+<span id=title><h3>Library {{lib_prep}}</h3></span><a class=add href="{% url 'library_prep_add' %}" >New</a>
+
+	<table id='consult_table' >
+		{{ lib_prep_form }}		
+	</table>	
+	<script type="text/javascript"> 
+		$('#consult_table').find('*').attr('readonly', true);
+	</script>
+
+<div id=nav_bar >
+	<li><a href="{% url 'project_library_prep_list' current_project %}">Back</a></li>
+	<li><a href="{% url 'library_prep_edit' lib_prep.library_id %}">Edit {{ lib_prep }}</a></li>
+	<li><href="{% url 'run_add'%}">New Run</a></li>
+</div>
+
+{% endblock %}	

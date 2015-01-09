@@ -1,0 +1,591 @@
+@import url('widgets.css');
+
+
+/* FORM */
+
+button#collapse {
+	display:block;
+	height: 25px;
+	/*float: right;*/
+	width: 200px;
+	padding:3px;
+	
+	border-radius:5px;
+	box-shadow:1px 1px 2px #C0C0C0 inset;
+	background-color: #EEEEEE;
+	margin-left:5px;
+	margin-bottom: 15px;
+	cursor:pointer;
+ 
+}
+
+form {
+    margin: 0;
+    padding: 0 ;
+    border: none;
+    min-width: 280px;
+ }
+ 
+fieldset {
+ padding:0 20px 20px 20px;
+ margin-bottom:10px;
+ border:1px solid #000;
+ }
+ 
+legend {
+ color:#000;
+ font-weight:bold
+ }
+ 
+label {
+
+ margin-top:10px;
+ margin-right:10px;
+ display:block;
+ display:inline;
+}
+
+label.inline {
+ display:inline;
+ margin-right:50px;
+ }
+ 
+ 
+input, textarea, select, option{
+ background-color:#EEEEEE;
+ }
+ 
+input, textarea, select {
+ padding:3px;
+ border-radius:5px;
+ box-shadow:1px 1px 2px #C0C0C0 inset;
+ }
+ 
+textarea {
+ height: 100px;
+ width: 300px;
+}
+ 
+select[multiple=multiple]{
+ border:none;
+ margin-top:10px;
+ min-width: 150px;
+ height: 100px;
+ 
+ }
+ 
+input[type=radio] {
+ background-color:transparent;
+ border:none;
+ width:10px;
+ }
+ 
+input[type=submit], input[type=reset] {
+
+ height:25px;
+ margin-left:5px;
+ box-shadow:1px 1px 1px #C0C0C0;
+ cursor:pointer;
+ }
+
+#content ul li{
+	text-decoration: none;
+	font-size: 11px;
+	border-bottom: 1px solid #eee;
+}
+
+
+/* FORM ROWS */
+
+.form-row {
+    overflow: hidden;
+    padding: 8px 12px;
+    font-size: 11px;
+    border-bottom: 1px solid #eee;
+}
+
+.form-row img, .form-row input {
+    vertical-align: middle;
+}
+
+form .form-row p {
+    padding-left: 0;
+    font-size: 11px;
+}
+
+/* FORM LABELS */
+
+form h4 {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+label {
+    font-weight: normal !important;
+    color: #666;
+    display:block;
+    float:right;
+    font-size: 12px;
+}
+
+.required label, label.required {
+    font-weight: bold !important;
+    color: #333 !important;
+}
+/* HELP */
+
+.helptext {
+	cursor: help;
+	color: #777777;
+    font-size: 10px 
+
+}
+/* RADIO BUTTONS */
+
+form ul.radiolist li {
+    list-style-type: none;
+}
+
+form ul.radiolist label {
+    float: none;
+    display: inline;
+}
+
+form ul.inline {
+    margin-left: 0;
+    padding: 0;
+}
+
+form ul.inline li {
+    float: left;
+    padding-right: 7px;
+    text-decoration: none;
+}
+
+/* ALIGNED FIELDSETS */
+
+.aligned label {
+    display: block;
+    padding: 3px 10px 0 0;
+    float: left;
+    width: 8em;
+}
+
+.aligned ul label {
+    display: inline;
+    float: none;
+    width: auto;
+}
+
+.colMS .aligned .vLargeTextField, .colMS .aligned .vXMLLargeTextField {
+    width: 350px;
+}
+
+form .aligned p, form .aligned ul {
+    margin-left: 7em;
+    padding-left: 30px;
+}
+
+form .aligned table p {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+form .aligned p.help {
+    padding-left: 38px;
+}
+
+.aligned .vCheckboxLabel {
+    float: none !important;
+    display: inline;
+    padding-left: 4px;
+}
+
+.colM .aligned .vLargeTextField, .colM .aligned .vXMLLargeTextField {
+    width: 610px;
+}
+
+.checkbox-row p.help {
+    margin-left: 0;
+    padding-left: 0 !important;
+}
+
+li {
+	list-style: none outside none;
+}
+
+
+fieldset .field-box {
+    float: left;
+    margin-right: 20px;
+}
+
+
+/* CUSTOM FORM FIELDS */
+
+.vSelectMultipleField {
+    vertical-align: top !important;
+}
+
+.vCheckboxField {
+    border: none;
+}
+
+.vDateField, .vTimeField {
+    margin-right: 2px;
+}
+
+.vURLField {
+    width: 30em;
+}
+
+.vLargeTextField, .vXMLLargeTextField {
+    width: 48em;
+}
+
+.flatpages-flatpage #id_content {
+    height: 40.2em;
+}
+
+.module table .vPositiveSmallIntegerField {
+    width: 2.2em;
+}
+
+.vTextField {
+    width: 20em;
+}
+
+.vIntegerField {
+    width: 5em;
+}
+
+.vBigIntegerField {
+    width: 10em;
+}
+
+.vForeignKeyRawIdAdminField {
+    width: 5em;
+}
+
+
+/* INLINES */
+
+.inline-group {
+    padding: 0;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.inline-group .aligned label {
+    width: 8em;
+}
+
+.inline-related {
+    position: relative;
+}
+
+.inline-related h3 {
+    margin: 0;
+    color: #666;
+    padding: 3px 5px;
+    font-size: 11px;
+    background: #e1e1e1 url(../img/nav-bg.gif) top left repeat-x;
+    border-bottom: 1px solid #ddd;
+}
+
+.inline-related h3 span.delete {
+    float: right;
+}
+
+.inline-related h3 span.delete label {
+    margin-left: 2px;
+    font-size: 11px;
+}
+
+.inline-related fieldset {
+    margin: 0;
+    background: #fff;
+    border: none;
+    width: 100%;
+}
+
+.inline-related fieldset.module h3 {
+    margin: 0;
+    padding: 2px 5px 3px 5px;
+    font-size: 11px;
+    text-align: left;
+    font-weight: bold;
+    background: #bcd;
+    color: #fff;
+}
+
+.inline-group .tabular fieldset.module {
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.inline-related.tabular fieldset.module table {
+    width: 100%;
+}
+
+.last-related fieldset {
+    border: none;
+}
+
+.inline-group .tabular tr.has_original td {
+    padding-top: 2em;
+}
+
+.inline-group .tabular tr td.original {
+    padding: 2px 0 0 0;
+    width: 0;
+    _position: relative;
+}
+
+.inline-group .tabular th.original {
+    width: 0px;
+    padding: 0;
+}
+
+.inline-group .tabular td.original p {
+    position: absolute;
+    left: 0;
+    height: 1.1em;
+    padding: 2px 7px;
+    overflow: hidden;
+    font-size: 9px;
+    font-weight: bold;
+    color: #666;
+    _width: 700px;
+}
+
+.inline-group ul.tools {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.inline-group ul.tools li {
+    display: inline;
+    padding: 0 5px;
+}
+
+.inline-group div.add-row,
+.inline-group .tabular tr.add-row td {
+    color: #666;
+    padding: 3px 5px;
+    border-bottom: 1px solid #ddd;
+    background: #e1e1e1 url(../img/nav-bg.gif) top left repeat-x;
+}
+
+.inline-group .tabular tr.add-row td {
+    padding: 4px 5px 3px;
+    border-bottom: none;
+}
+
+.inline-group ul.tools a.add,
+.inline-group div.add-row a,
+.inline-group .tabular tr.add-row td a {
+    background: url(../img/icon_addlink.gif) 0 50% no-repeat;
+    padding-left: 14px;
+    font-size: 11px;
+    outline: 0; /* Remove dotted border around link */
+}
+
+.empty-form {
+    display: none;
+}
+.errorlist { 
+	
+	color: white; 
+	margin: -3px 0 3px 0;
+	list-style: none; 
+	background:  #ffbb55}
+
+
+/* FilteredSelectMultiple Widget */
+
+.selector h2{
+    color: #666666;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0;
+    padding: 2px 5px 3px;
+    text-align: left;
+}
+
+
+.selector {
+	overflow: visible;
+    float: left;
+    width: 840px;
+}
+.selector select {
+    height: 17.2em;
+    width: 300px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+
+.selector-available, .selector-chosen {
+    float: left;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 300px;
+}
+.selector-chosen select {
+    border-top: medium none;
+}
+.selector-available h2, .selector-chosen h2 {
+    border: 1px solid #CCCCCC;
+}
+.selector .selector-available h2 {
+    background: url("../img/nav-bg.gif") repeat-x scroll left bottom #FFFFFF;
+    color: #666666;
+}
+.selector label{
+	float: none;
+	display: inline;
+	padding: 2px;
+    width: 16px;
+    margin-right: 0px;
+    margin-top: 0px;
+	}
+	
+.selector .selector-filter {
+
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 0 1px;
+    color: #999999;
+    font-size: 10px;
+    margin: 0;
+    padding: 3px;
+    text-align: left;
+}
+.selector .selector-filter label, .inline-group .aligned .selector .selector-filter label {
+    padding: 2px;
+    width: 16px;
+}
+
+.selector ul.selector-chooser {
+    background: url("../img/chooser-bg.gif") no-repeat scroll center top rgba(0, 0, 0, 0);
+    float: left;
+    height: 50px;
+    margin: 10em 5px 0;
+    padding: 0;
+    width: 22px;
+}
+.selector-chooser li {
+    list-style-type: none;
+    margin: 0;
+    padding: 3px;
+}
+
+.selector-add, .selector-remove {
+    display: block;
+    height: 16px;
+    overflow: hidden;
+    text-indent: -3000px;
+    width: 16px;
+}
+.selector-add {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -161px rgba(0, 0, 0, 0);
+    cursor: default;
+    margin-bottom: 2px;
+}
+.active.selector-add {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -187px rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+.selector-remove {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -109px rgba(0, 0, 0, 0);
+    cursor: default;
+}
+.active.selector-remove {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -135px rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+a.selector-chooseall, a.selector-clearall {
+    color: #666666;
+    display: inline-block;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+a.selector-chooseall {
+    padding: 3px 18px 3px 0;
+}
+a.selector-clearall {
+    padding: 3px 0 3px 18px;
+}
+a.active.selector-chooseall:hover, a.active.selector-clearall:hover {
+    color: #003366;
+}
+a.selector-chooseall {
+    background: url("../img/selector-icons.gif") no-repeat scroll right -263px rgba(0, 0, 0, 0);
+    cursor: default;
+}
+a.active.selector-chooseall {
+    background: url("../img/selector-icons.gif") no-repeat scroll right -289px rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+a.selector-clearall {
+    background: url("../img/selector-icons.gif") no-repeat scroll left -211px rgba(0, 0, 0, 0);
+    cursor: default;
+}
+a.active.selector-clearall {
+    background: url("../img/selector-icons.gif") no-repeat scroll left -237px rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+.stacked {
+    float: left;
+    width: 500px;
+}
+.stacked select {
+    height: 10.1em;
+    width: 480px;
+}
+.stacked .selector-available, .stacked .selector-chosen {
+    width: 480px;
+}
+.stacked .selector-available {
+    margin-bottom: 0;
+}
+.stacked .selector-available input {
+    width: auto;
+}
+.stacked ul.selector-chooser {
+    background: url("../img/chooser_stacked-bg.gif") no-repeat scroll center top rgba(0, 0, 0, 0);
+    height: 22px;
+    margin: 0 0 3px 40%;
+    width: 50px;
+}
+.stacked .selector-chooser li {
+    float: left;
+    padding: 3px 3px 3px 5px;
+}
+.stacked .selector-chooseall, .stacked .selector-clearall {
+    display: none;
+}
+.stacked .selector-add {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -57px rgba(0, 0, 0, 0);
+    cursor: default;
+}
+.stacked .active.selector-add {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -83px rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+.stacked .selector-remove {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -5px rgba(0, 0, 0, 0);
+    cursor: default;
+}
+.stacked .active.selector-remove {
+    background: url("../img/selector-icons.gif") no-repeat scroll 0 -31px rgba(0, 0, 0, 0);
+    cursor: pointer;
+}

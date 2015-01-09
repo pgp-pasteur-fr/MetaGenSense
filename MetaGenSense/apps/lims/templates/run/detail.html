@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" />
+    
+    <script src="/admin/jsi18n/" type="text/javascript"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui.js"></script>
+	{{ run_form.media }} 
+    
+{% endblock %}
+
+{% block content %}
+
+
+<span id=title><h3>Run informations</h3></span><a class=add href="{% url 'run_add' %}" >New</a>
+		<form>
+		<table>
+		  {{ run_form }} {% csrf_token %}
+		</table>
+		</form>
+		<script type="text/javascript"> 
+			$('#consult_table').find('*').attr('readonly', true);
+		</script>
+		
+<div id=nav_bar >
+	<li><a href="{% url 'project_run_list' current_project %}">Back</a></li>
+	<li><a href="{% url 'run_edit' run_form.run_id.value %}">Edit {{ lib_prep }}</a></li>
+</div>
+{% endblock %}

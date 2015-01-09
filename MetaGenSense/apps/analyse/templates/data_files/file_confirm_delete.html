@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
+{% endblock %}
+
+{% block content %}
+<section>
+	<form action="" method="post">
+	    <p>Are you sure you want to delete "{{ object }}"?</p>
+	    {% csrf_token %}
+	    <input type="hidden" name="confirm" value="yes" />
+	    <input type="submit" value="Yes, I'm sure" /> 
+	    <input type="submit" name="confirm" value="No !" />
+	</form>
+</section>
+{% endblock %}

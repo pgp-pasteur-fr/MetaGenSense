@@ -1,0 +1,23 @@
+<p>Dataset:</p>
+		<table>
+		  {% for data in dataset %}
+		  <tr>
+		    <td>
+		    	<div>
+		    	<div id={{data.type}}></div>
+		    	{% if data.type = "file" %}
+		    		<input type="checkbox" name ="file" value= {{ data.id }}>
+		   		{% endif%}
+		    	<label for={{ data.id }} >{{data.name}}
+		    	</label>
+		   	 	</div>
+		   	</td>
+		   	<td>
+		   	{% if data.type = "file" %}
+		   	  <a class=delete title="Delele file" href="{% url 'remove_library_dataset' data.id %}"></a>
+		   	{% endif%}
+		   	</td>
+		  </tr>
+		  {% endfor %}
+		</table>
+		<br>

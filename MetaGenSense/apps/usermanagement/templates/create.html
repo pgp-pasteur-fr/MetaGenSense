@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{%block stylesheet%}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/create.css" media="screen"/>
+{% endblock %}
+
+{% block content %}
+
+  <div id="branding">    
+			<h2>New user</h2>
+  </div>
+ <div id="content-main">
+	<form action ="" method= "POST">
+		{%csrf_token%}
+		{{form.as_p}}
+	<input type="submit" value="Valider">
+</div>
+</form>
+{% endblock %}

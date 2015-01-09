@@ -1,0 +1,15 @@
+<p>Histories:</p>
+	<ul>
+		{% for history in histories|dictsortreversed:"name"%}
+			{%if current_project in history.name %}
+			 <li class="{% cycle 'row1' 'row2' %}">
+			 	<a href= "{% url 'galaxy_history_detail' history.id %}">{{ history.name }}</a>
+			 </li>
+			{% endif %}
+		{% empty %}
+			<li>
+				Your have no history for this project, please select data(s) and click on "create history" 
+			</li>
+		{% endfor %}
+	</ul>
+</section>
