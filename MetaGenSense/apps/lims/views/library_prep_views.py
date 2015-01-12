@@ -6,17 +6,14 @@ from ..models import LibraryPreparation, Sample
 from project_views import auth_project
 from project_views import project_required
 
-
-def add(request):
+@project_required
+@login_required
+def add(request, project):
     """add sample_prep information"""
-    
-    project = request.session.get('current_project')
-    auth_project(project, request.user)
     
     lib_prep_form = LibraryPreparationForm(request.POST or None)
     lib_prep_form.fields["sample"].queryset = Sample.objects.filter(project__name=project)
 
-   
     if lib_prep_form.is_valid():
         
         lib_prep = lib_prep_form.save()
@@ -29,12 +26,11 @@ def add(request):
     return render (request, 'library_prep/add.html', {
                                                'lib_prep_form': lib_prep_form ,
                                                 })
-    
-def detail(request, library_id):
+
+@project_required
+@login_required    
+def detail(request, project, library_id) :
     """show detail sample"""
-    
-    project = request.session.get('current_project')
-    auth_project (project, request.user)
     
     lib_prep = LibraryPreparation.objects.get(library_id=library_id)
     library_prep_form = LibraryPreparationForm(instance=lib_prep)
@@ -64,19 +60,11 @@ def edit(request, project, library_id):
         
     return render(request, 'library_prep/add.html', {'lib_prep_form':library_prep_form })
 
-
+@project_required
+@login_required
 def projectLibraryPrepList(request, project):
     """return the samples list of the  project"""
     
-    my_project = auth_project (project, request.user)
-    
-    if request.user.is_authenticated():
-        
-        libs_prep = LibraryPreparation.objects.filter(sample__project=my_project)
- 
-        return render(request, 'library_prep/list.html', {'libraries':libs_prep}) 
+    libs_prep = LibraryPreparation.objects.filter(sample__project=my_project)
+    return render(request, 'library_prep/list.html', {'libraries':libs_prep}) 
                                                            
-
-
-
-
