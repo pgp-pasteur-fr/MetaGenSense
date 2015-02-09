@@ -40,7 +40,7 @@ def connection_galaxy(func):
           
         server_path = settings.GALAXY_SERVER_DIR + gi.roles
         gi.set_sbw_galaxy_server_path(server_path)
-        gi.sbw_galaxy_folder = 'synbiowatch'
+        gi.sbw_galaxy_folder = 'MGS'
         
         return func(request, project, gi, *args, **kwargs)
     
