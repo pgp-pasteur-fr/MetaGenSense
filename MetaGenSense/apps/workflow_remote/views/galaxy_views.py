@@ -1,4 +1,5 @@
 # -*- coding: Utf-8 -*-
+import os
 from django.shortcuts import render, render_to_response, redirect, HttpResponseRedirect
 import urllib2, urllib, urlparse
 from django.conf import settings
@@ -38,9 +39,10 @@ def connection_galaxy(func):
         # personnal folder
         gi.roles = gu_info.get("email")
           
-        server_path = settings.GALAXY_SERVER_DIR + gi.roles
-        gi.set_sbw_galaxy_server_path(server_path)
-        gi.sbw_galaxy_folder = 'MGS'
+        user_input_path = os.join(settings.GALAXY_INPUT_DIR, gi.roles)
+        
+        gi.galaxy_input_path(user_input_path)
+        gi.MGS_folder = settings.MGS_GALAXY_FOLDER
         
         return func(request, project, gi, *args, **kwargs)
     
@@ -65,9 +67,8 @@ def galaxydir_to_dataset(request, project=None, gi=None):
                     importedfiles = gi.import_file_to_galaxy(library_id, data['id'], project)    
                 except Exception, e :
                     print e 
-                    import os
                     dataset = [{'name':'Please put file(s) into your galaxy links directory at: '},
-                               {'name':os.path.join(gi.sbw_galaxy_server_path, gi.sbw_galaxy_folder, project)},
+                               {'name':os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)},
                                ]
                     return render_to_response("galaxy/includes/dataset.html", {'dataset':dataset})
                           
