@@ -1,35 +1,29 @@
 # -*-coding:Utf-8 -*
 
 from bioblend.galaxy import GalaxyInstance 
-import  time
-
+import time
+import os
 
 
 class SBWGalaxyInstance(GalaxyInstance):    
-    """to custom bioblend request for sbw"""
+    """to custom bioblend request for MGS"""
     
     def __init__(self, url, key):                
         GalaxyInstance.__init__(self, url, key)   
           
-        self.sbw_galaxy_server_path = ''
-        self.sbw_galaxy_folder = ''  # dossier parent ou seront stocker les projects
+        self.galaxy_input_path = ''
+        self.MGS_folder = ''  #name folder to store library of MetaGenSense in galaxy  
         self.roles = ''
-    
-    
-    def set_sbw_galaxy_server_path(self, path):    
-        self.sbw_galaxy_server_path = path
-        
-    def get_sbw_galaxy_server_path(self):
-        return self.sbw_galaxy_server_path
+
        
     def display_folders(self, library_id, project):
-        "Retourne le contenu du dossier du projet situe dans le reperoire Synbiowatch de Galaxy "
+        "Retourne le contenu du dossier du projet situé dans le reperoire MetaGenSense de Galaxy "
         
         folders = self.libraries.show_library(library_id=library_id, contents=True)
         project_folder = []
         
         for data in folders:
-            if (self.sbw_galaxy_folder + '/' + project) in data['name']:
+            if (self.MGS_folder + '/' + project) in data['name']:
                 project_folder.append(data)
                 
         return project_folder
@@ -40,7 +34,7 @@ class SBWGalaxyInstance(GalaxyInstance):
         project_folder = []
         
         for f in folders:
-            if (self.sbw_galaxy_folder + '/' + project) in f['name']:
+            if (self.MGS_folder + '/' + project) in f['name']:
                 project_folder.append(f)
                 
         return project_folder
@@ -56,7 +50,7 @@ class SBWGalaxyInstance(GalaxyInstance):
     
     def create_folder(self, library_id, folder_path, folders=None):
         """
-            Crée les dossiers dans le reperoire Synbiowatch de Galaxy 
+            Crée les dossiers dans le reperoire MetaGenSense de Galaxy 
             a l'aide d'un path et de l'id galaxy de la librairie à utiliser.
         """
         
@@ -66,10 +60,10 @@ class SBWGalaxyInstance(GalaxyInstance):
             folders = self.libraries.show_library(library_id=library_id, contents=True)
               
         # on recupere l'id du repertoire parent
-        parent_folder_path, folder_name = folder_path.rsplit('/', 1)
+        parent_folder_path, folder_name = folder_path.rsplit(os.sep, 1)
 
         if not parent_folder_path:
-            root_path = "/"
+            root_path = os.sep
             parent_folder = self.get_folder_by_path(folders, root_path)
             
         else:
@@ -93,7 +87,7 @@ class SBWGalaxyInstance(GalaxyInstance):
     
     def get_or_create_dataset(self, project, library_id):
         """
-        Retourne le contenu du dossier du projet situe dans le reperoire Synbiowatch de Galaxy
+        Retourne le contenu du dossier du projet situe dans le reperoire MetaGenSense de Galaxy
         crée le repertoire dans galaxy s'il n'exite pas 
         """
         project_folders = self.display_folders(library_id, project)
@@ -102,7 +96,7 @@ class SBWGalaxyInstance(GalaxyInstance):
             return project_folders
         
         else:
-            path = '/' + self.sbw_galaxy_folder + '/' + project
+            path = os.path.join(self.MGS_folder, project)
             self.create_folder(library_id, path)
             
             # mise a jour
@@ -111,10 +105,11 @@ class SBWGalaxyInstance(GalaxyInstance):
         
        
     def import_file_to_galaxy(self, library_id, folder_id, project):
-        """ Import file into galaxy in the library folder from link/'user'/"SynBioWatch"/project name
+        """ Import file into galaxy in the library folder from link/'user'/"MetaGenSense"/project name
             Return list of imported files
         """
-        server_dir = self.get_sbw_galaxy_server_path() + '/' + self.sbw_galaxy_folder + '/' + project + '/'      
+        
+        server_dir = os.path.join(self.galaxy_input_path, self.MGS_folder, project)
         return self.libraries.upload_file_from_server(library_id, server_dir, folder_id=folder_id, roles=self.roles)
 
        

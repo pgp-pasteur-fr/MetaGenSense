@@ -8,11 +8,11 @@ from views.galaxy_user_views import galaxy_user_update, galaxy_users
 
 from django.conf import settings
 
-print settings.WORKWFLOW_MANAGEMENT_SYSTEM
+print settings.WORKFLOW_MANAGEMENT_SYSTEM
 
 urlpatterns = patterns('',
     #url(r'^workflows/$', Launch_workflow.as_view(),name='workflows'),
-    url(r'^workflows/$', RedirectView.as_view(url= settings.WORKWFLOW_MANAGEMENT_SYSTEM.lower()+'/' ),name='workflows'),
+    url(r'^workflows/$', RedirectView.as_view(url= settings.WORKFLOW_MANAGEMENT_SYSTEM.lower()+'/' ),name='workflows'),
     url(r'^workflows/run_workflow_list/$', run_workflow_list, name="run_workflow_list"  ),
     
     #url to use galaxy

@@ -40,7 +40,7 @@ class galaxy_users(ListView):
                 gu_info = gi.users.get_current_user()
                 l.append(gu_info['username'])
             except:
-                pass
+                return gu_info
           
         return set(l)
     
