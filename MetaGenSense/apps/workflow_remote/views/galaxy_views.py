@@ -39,9 +39,9 @@ def connection_galaxy(func):
         # personnal folder
         gi.roles = gu_info.get("email")
           
-        user_input_path = os.join(settings.GALAXY_INPUT_DIR, gi.roles)
+        user_input_path = os.path.join(settings.GALAXY_INPUT_DIR, gi.roles)
         
-        gi.galaxy_input_path(user_input_path)
+	gi.galaxy_input_path = user_input_path
         gi.MGS_folder = settings.MGS_GALAXY_FOLDER
         
         return func(request, project, gi, *args, **kwargs)

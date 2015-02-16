@@ -3,7 +3,7 @@
 from bioblend.galaxy import GalaxyInstance 
 import time
 import os
-
+import logging
 
 class SBWGalaxyInstance(GalaxyInstance):    
     """to custom bioblend request for MGS"""
@@ -110,7 +110,8 @@ class SBWGalaxyInstance(GalaxyInstance):
         """
         
         server_dir = os.path.join(self.galaxy_input_path, self.MGS_folder, project)
-        return self.libraries.upload_file_from_server(library_id, server_dir, folder_id=folder_id, roles=self.roles)
+        print server_dir
+	return self.libraries.upload_file_from_server(library_id, server_dir, folder_id=folder_id)
 
        
     def import_dataset_to_history(self, project, library_id, dataset_id, suffix=""):
