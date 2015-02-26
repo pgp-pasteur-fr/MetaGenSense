@@ -40,7 +40,7 @@ class galaxy_users(ListView):
                 gu_info = gi.users.get_current_user()
                 l.append(gu_info['username'])
             except:
-                print user + " can't access to Galaxy, perhaps because wrong Api key"
+                print str(user) + " can't access to Galaxy, perhaps because wrong Api key"
                                  
         return set(l)
     
