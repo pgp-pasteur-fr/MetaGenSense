@@ -92,16 +92,15 @@ class SBWGalaxyInstance(GalaxyInstance):
         """
         project_folders = self.display_folders(library_id, project)
         
-        if project_folders:
-            return project_folders
-        
-        else:
+        if not project_folders:
+
             path = os.path.join(self.MGS_folder, project)
             self.create_folder(library_id, path)
             
             # mise a jour
             project_folders = self.display_folders(library_id, project)
-            return project_folders
+            
+        return project_folders
         
        
     def import_file_to_galaxy(self, library_id, folder_id, project):
