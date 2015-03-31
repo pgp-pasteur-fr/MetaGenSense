@@ -55,9 +55,10 @@ def connection_galaxy(func):
 def galaxydir_to_dataset(request, project=None, gi=None):
     """import les fichiers situes dans le repertoires links dans galaxy
     """
+    message = "Not ajax"
     if request.is_ajax():
-        library_id = gi.libraries.get_libraries()[0]['id']   
-        dataset = gi.display_folders(library_id, project)
+        library_id = gi.libraries.get_libraries()[0]['id'] 
+        dataset = gi.get_or_create_dataset(project, library_id)
         
         for data in dataset:  
             # recupere l'id du folder du projet
@@ -67,12 +68,12 @@ def galaxydir_to_dataset(request, project=None, gi=None):
                     importedfiles = gi.import_file_to_galaxy(library_id, data['id'], project)    
                 except Exception, e :
                     print e 
-                    dataset = [{'name':'Please put file(s) into your galaxy links directory at: '},
-                               {'name':os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)},
-                               ]
-                    return render_to_response("galaxy/includes/dataset.html", {'dataset':dataset})
-                          
-                dataset = gi.get_or_create_dataset(project, library_id)
+                    message ="Please put file(s) into your galaxy links directory at: /ns%"%(
+                    				os.path.join(gi.galaxy_input_path, gi.MGS_folder, project))
+                  
+                    return render_to_response("galaxy/includes/dataset.html", {'messages':messages})
+                         
+                dataset = gi.display_folders(library_id, project)
                 
                 # format names 
                 for data in dataset:
@@ -81,7 +82,10 @@ def galaxydir_to_dataset(request, project=None, gi=None):
                         data['name'] = tmp[-1]
             
                 return render_to_response("galaxy/includes/dataset.html", {'dataset':dataset, 'importedfiles':importedfiles})
-
+        else:
+            message = "dataset is empty or not does not contenain %s folder" %(project)
+        
+    return render_to_response("galaxy/includes/dataset.html", {'messages':message})
 
 
 @login_required
