@@ -30,14 +30,14 @@ GALAXY_INPUT_DIR ='/pasteur/projets/common/galaxy/links'
 MGS_GALAXY_FOLDER = '/MGS' #absolute path
 GALAXY_SERVER_URL ='https://galaxyapi.web.pasteur.fr/'
 
+#Path to store upload file 
+MGS_UPLOAD_FILE_DIR = os.path.join(os.path.sep,'opt','metagensense','limsfiles')
 #folder to save analyse on the server
 ANALYSE_FOLDER= 'analyse'
 
 #Python Path for Reusable Django Apps
 sys.path.insert(0, PROJECT_PATH )
 
-#Path to store upload file 
-MGS_UPLOAD_FILE_DIR = os.path.join(os.path.sep,'opt','MetaGenSense','share_files')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
