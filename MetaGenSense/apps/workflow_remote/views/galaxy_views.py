@@ -263,7 +263,7 @@ def save_file_information(request, project, gi, file_id):
                                 project=project_obj                              
                                 )
 
-    file_info.file_path.save('%s/%s/%s/%s' % (settings.ANALYSE_FILE_PATH, project, name_history, data['name']) , ContentFile(response.read()), save=False)   
+    file_info.file_path.save('%s/%s/%s/%s' % (settings.ANALYSE_FOLDER, project, name_history, data['name']) , ContentFile(response.read()), save=False)   
     file_info.save()
     
     worflowdata = WorkflowData (data=file_info,
