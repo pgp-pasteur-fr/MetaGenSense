@@ -10,9 +10,10 @@ class SBWGalaxyInstance(GalaxyInstance):
     
     def __init__(self, url, key):                
         GalaxyInstance.__init__(self, url, key)   
-          
+        
         self.galaxy_input_path = ''
-        self.MGS_folder = ''  #name folder to store library of MetaGenSense in galaxy  
+        self.library_name = '' #library to store data folder
+        self.MGS_folder = ''   #name folder to store library of MetaGenSense in galaxy  
         self.roles = ''
 
        
