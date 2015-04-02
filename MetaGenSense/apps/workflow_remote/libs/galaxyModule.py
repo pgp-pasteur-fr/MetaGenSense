@@ -49,7 +49,7 @@ class SBWGalaxyInstance(GalaxyInstance):
     
     
     
-    def create_folder(self, library_id, folder_path, folders=None):
+    def mgs_create_folder(self, library_id, folder_path, folders=None):
         """
             Crée les dossiers dans le reperoire MetaGenSense de Galaxy 
             a l'aide d'un path et de l'id galaxy de la librairie à utiliser.
@@ -73,16 +73,12 @@ class SBWGalaxyInstance(GalaxyInstance):
         
         # si le parent n'exite pas et si le parent n'est pas la racine
         if not parent_folder:
-            parent_folder = self.create_folder(library_id, parent_folder_path, folders)  
+            parent_folder = self.mgs_create_folder(library_id, parent_folder_path, folders)  
 
-        payload = {
-                   'name' : folder_name,
-                   'folder_id':parent_folder['id'] ,
-                   'create_type' : 'folder',
-                   'roles': self.roles,
-                   }
-        newfolder = self.libraries._post(payload, id=library_id, contents=True)
-        
+        newfolder = self.libraries.create_folder(library_id=library_id,
+        					 folder_name=folder_name,
+        					 base_folder_id=parent_folder['id'],
+        					 )
         return newfolder[0]
                 
     
@@ -96,7 +92,7 @@ class SBWGalaxyInstance(GalaxyInstance):
         if not project_folders:
 
             path = os.path.join(self.MGS_folder, project)
-            self.create_folder(library_id, path)
+            self.mgs_create_folder(library_id, path)
             
             # mise a jour
             project_folders = self.display_folders(library_id, project)
