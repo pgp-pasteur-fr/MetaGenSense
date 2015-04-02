@@ -41,6 +41,7 @@ def connection_galaxy(func):
           
         user_input_path = os.path.join(settings.GALAXY_INPUT_DIR, gi.roles)
         
+        gi.library_name = gi.roles #TODO add field in galaxyuser model
 	gi.galaxy_input_path = user_input_path
         gi.MGS_folder = settings.MGS_GALAXY_FOLDER
         
@@ -57,7 +58,7 @@ def galaxydir_to_dataset(request, project=None, gi=None):
     """
     message = "Not ajax"
     if request.is_ajax():
-        library_id = gi.libraries.get_libraries()[0]['id'] 
+        library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id'] 
         dataset = gi.get_or_create_dataset(project, library_id)
         
         for data in dataset:  
@@ -95,7 +96,7 @@ def remove_library_dataset(request, dataset_id, project=None, gi=None):
     """
         delete "overimported" dataset
     """
-    library_id = gi.libraries.get_libraries()[0]['id']
+    library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id']
     gi.libraries.delete_library_dataset(library_id, dataset_id, purged=False)
     
     return redirect('workflow_datasets')
@@ -111,7 +112,7 @@ def workflow_datasets(request, project=None, gi=None):
     
     dataset = ''
     histories = ''
-    library_id = gi.libraries.get_libraries()[0]['id']   
+    library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id']   
     histories = gi.histories.get_histories()  
               
     # import les donnees dans l'historique de l'utilisateur
@@ -143,7 +144,7 @@ def get_galaxy_dataset(request, project, gi):
     if request.is_ajax():    
                     
             # recupere l'ID de la 1ere library de l'utilisateur
-            library_id = gi.libraries.get_libraries()[0]['id']
+            library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id']
             dataset = gi.get_or_create_dataset(project, library_id)
                 
             # format names 
