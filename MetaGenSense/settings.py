@@ -27,7 +27,7 @@ WK_EXPORT_DIR = '/opt/MGS/outputs'
 
 #Path to access to Galaxy personal import directory form server
 GALAXY_INPUT_DIR ='/pasteur/projets/common/galaxy/links'
-MGS_GALAXY_FOLDER = 'MGS'
+MGS_GALAXY_FOLDER = '/MGS' #absolute path
 GALAXY_SERVER_URL ='https://galaxyapi.web.pasteur.fr/'
 
 #folder to save analyse on the server
