@@ -56,7 +56,7 @@ def connection_galaxy(func):
 def galaxydir_to_dataset(request, project=None, gi=None):
     """import les fichiers situes dans le repertoires links dans galaxy
     """
-    message = "Not ajax"
+    msg = "Not ajax"
     if request.is_ajax():
         library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id'] 
         dataset = gi.get_or_create_dataset(project, library_id)
@@ -69,10 +69,11 @@ def galaxydir_to_dataset(request, project=None, gi=None):
                     importedfiles = gi.import_file_to_galaxy(library_id, data['id'], project)    
                 except Exception, e :
                     print e 
-                    message ="Please put file(s) into your galaxy links directory at: /ns%"%(
-                    				os.path.join(gi.galaxy_input_path, gi.MGS_folder, project))
+                    messages.add_message(request, messages.WARNING,
+                                        "Please put file(s) into your galaxy links directory at: /ns%"%(
+                    				    os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
                   
-                    return render_to_response("galaxy/includes/dataset.html", {'messages':messages})
+                    return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
                          
                 dataset = gi.display_folders(library_id, project)
                 
@@ -84,9 +85,11 @@ def galaxydir_to_dataset(request, project=None, gi=None):
             
                 return render_to_response("galaxy/includes/dataset.html", {'dataset':dataset, 'importedfiles':importedfiles})
         else:
-            message = "dataset is empty or not does not contenain %s folder" %(project)
-        
-    return render_to_response("galaxy/includes/dataset.html", {'messages':message})
+            msg = "dataset is empty or not does not contenain %s folder" %(project)
+    
+    messages.add_message(request, messages.WARNING, msg)
+    return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
+
 
 
 @login_required
