@@ -104,10 +104,10 @@ class SBWGalaxyInstance(GalaxyInstance):
         """ Import file into galaxy in the library folder from link/'user'/"MetaGenSense"/project name
             Return list of imported files
         """
+        server_dir = os.path.join(self.galaxy_input_path, self.MGS_folder.strip(os.sep), project)
         
-        server_dir = os.path.join(self.galaxy_input_path, self.MGS_folder, project)
-        print server_dir
-	return self.libraries.upload_file_from_server(library_id, server_dir, folder_id=folder_id)
+        print server_dir, self.galaxy_input_path, self.MGS_folder, project
+        return self.libraries.upload_file_from_server(library_id, server_dir, folder_id=folder_id)
 
        
     def import_dataset_to_history(self, project, library_id, dataset_id, suffix=""):

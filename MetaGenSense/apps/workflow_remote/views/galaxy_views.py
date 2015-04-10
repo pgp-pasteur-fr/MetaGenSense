@@ -8,6 +8,7 @@ from django.core.files.base import ContentFile
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
 
 from MetaGenSense.apps.lims.models import FileInformation, Project
 from MetaGenSense.apps.lims.views.project_views import project_required
@@ -42,7 +43,7 @@ def connection_galaxy(func):
         user_input_path = os.path.join(settings.GALAXY_INPUT_DIR, gi.roles)
         
         gi.library_name = gi.roles #TODO add field in galaxyuser model
-	gi.galaxy_input_path = user_input_path
+        gi.galaxy_input_path = user_input_path
         gi.MGS_folder = settings.MGS_GALAXY_FOLDER
         
         return func(request, project, gi, *args, **kwargs)
@@ -70,7 +71,7 @@ def galaxydir_to_dataset(request, project=None, gi=None):
                 except Exception, e :
                     print e 
                     messages.add_message(request, messages.WARNING,
-                                        "Please put file(s) into your galaxy links directory at: /ns%"%(
+                                        "Please put file(s) into your galaxy links directory at: \n%s"%(
                     				    os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
                   
                     return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
