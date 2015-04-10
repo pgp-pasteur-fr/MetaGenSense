@@ -1,0 +1,12 @@
+# Python compiled files
+\*.py[co1]
+
+# project setting files
+MetaGenSense/*settings*
+MetaGenSense/wsgi.py
+
+~                                                                                                                                                                                                                
+~                                                                                                                                                                                                                
+~                                                                                                                                                                                                                
+~                                                                                                                                                                                                                
+~                         
