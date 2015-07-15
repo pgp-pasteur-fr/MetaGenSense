@@ -28,8 +28,8 @@ Installation
 
     You need the *MetaGenSense* project files in your workspace:
 
-      $ cd /path/to/your/workspace
-      $ git clone git://github.com/pgp-pasteur-fr/MetaGenSense.git
+      - cd /path/to/your/workspace
+      - git clone git://github.com/pgp-pasteur-fr/MetaGenSense.git
 
 3. Requirements installation
 
@@ -54,9 +54,9 @@ Installation
 
      Paths to access to Galaxy personal import directory form server:
 
-         GALAXY_SERVER_URL = http://.... #url to your Galaxy server
-         GALAXY_INPUT_DIR = 'links'      #path to put data into Galaxy with import tool
-         MGS_GALAXY_FOLDER = '/MGS' #absolute path to Galaxy library (directory inside links)
+         - GALAXY_SERVER_URL = http://.... #url to your Galaxy server
+         - GALAXY_INPUT_DIR = 'links'      #path to put data into Galaxy with import tool
+         - MGS_GALAXY_FOLDER = '/MGS' #absolute path to Galaxy library (directory inside links)
     
 
      Path where to store uploaded files:
@@ -79,14 +79,14 @@ Installation
      [DATABASES](https://docs.djangoproject.com/en/1.8/ref/settings/#databases)
      
      Create django models with the command: 
-         $ ./manage.py migrate`
+         - ./manage.py migrate`
 
    e. Test settings
 
      Starts a lightweight development Web server on the local machine. 
      By default, the server runs on port 8000 on the IP address 127.0.0.1. 
      You can pass in an IP address and port number explicitly.
-         $ ./manage.py runserver
+         - ./manage.py runserver
 
 
 
