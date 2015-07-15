@@ -1,7 +1,7 @@
 MetaGenSense
 ============
 
-   A web application framework for analysis and visualization of High throughput Sequencing metagenomic data requirements.txt file is:
+   A web application framework for analysis and visualization of High throughput Sequencing metagenomic data.
 
 Citation
 --------
@@ -49,6 +49,7 @@ Installation
      [SECRET_KEY](cf. https://docs.djangoproject.com/en/1.8/ref/settings/#secret-key)
 
    c. Paths setting
+   
      Set up this paths for you personal configuration/architecture .
 
      Paths to access to Galaxy personal import directory form server:
@@ -58,7 +59,7 @@ Installation
          MGS_GALAXY_FOLDER = '/MGS' #absolute path to Galaxy library (directory inside links)
     
 
-     Path where to store uploaded file:
+     Path where to store uploaded files:
 
          MGS_UPLOAD_FILE_DIR = os.path.join(os.path.sep,'opt','metagensense','limsfiles')
 
@@ -66,12 +67,13 @@ Installation
 
          ANALYSE_FOLDER = 'analyse'
 
-     Folder use to export big data by MetaGensense (>2Gb)':
+     Folder use to export big data by MetaGenSense (>2Gb)':
 
          WK_EXPORT_DIR = '/opt/MGS/outputs'
 
 
    d. Initialize the database
+   
      First you must have an database engine instaledl on your machine, 
      Set the database engine (PostgreSQL, MySQL, etc..) in your settings files; `MetaGenSense/settings.py` at `DATABASES` 
      [DATABASES](https://docs.djangoproject.com/en/1.8/ref/settings/#databases)
