@@ -6,18 +6,15 @@ A web application framework for analysis and visualization of High throughput Se
 Citation
 --------
 
-Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1, http://f1000r.es/52q] F1000Research 2015, 4:86 (doi: 10.12688/f1000research.6139.1) 
+Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1, http://f1000research.com/articles/4-86/v1 ] F1000Research 2015.
 
 Requirements
 ------------
 
-python==2.7
-
-Django==1.6.2
-
-bioblend==0.5.3
-
-psycopg2==2.6.1
+- python==2.7
+- Django==1.6.2
+- bioblend==0.5.3
+- psycopg2==2.6.1
 
 Installation
 ------------
