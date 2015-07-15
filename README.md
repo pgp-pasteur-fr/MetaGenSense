@@ -1,12 +1,12 @@
 MetaGenSense
 ============
 
-A web application framework for analysis and visualization of High throughput Sequencing metagenomic data requirements.txt file is:
+   A web application framework for analysis and visualization of High throughput Sequencing metagenomic data requirements.txt file is:
 
 Citation
 --------
 
-Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1, http://f1000research.com/articles/4-86/v1 ] F1000Research 2015.
+   Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high     throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1,     http://f1000research.com/articles/4-86/v1 ] F1000Research 2015.
 
 Requirements
 ------------
