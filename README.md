@@ -12,8 +12,11 @@ Requirements
 ------------
 
 python==2.7
+
 Django==1.6.2
+
 bioblend==0.5.3
+
 psycopg2==2.6.1
 
 Installation
