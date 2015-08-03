@@ -14,7 +14,7 @@ This step is the only one, not automated at all. Indeed, the user will need to d
 
 Example with user Jake Sully and the project named PanDora:
 ---------------------------
-::
+.. code-block:: shell
 
   # go in the galaxy transfer directory:
   cd galaxy/links/jake.sully/
