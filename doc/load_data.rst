@@ -15,5 +15,13 @@ Files loaded are now available to create analyze histories
 Create new history
 -------------------
 
-The files to analyze become datasets which will be copied within a galaxy history by clicking on the “create new history” button. 
-By default project name and date are used to create the name of this new history, user can use "add suffix" to personalize this name.
+The files to analyze become datasets which will be copied within a galaxy history:
+
+1 - Select files
+2 - Click on the “create new history” button. 
+
+By default project name and date are used to create the new history name, user can add a suffix to custom this name.
+
+If a new history is created, user is redirected to an other page where he will be invited to select a workflow.
+
+
