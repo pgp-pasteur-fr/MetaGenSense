@@ -18,7 +18,8 @@ Create new history
 The files to analyze become datasets which will be copied within a galaxy history:
 
 1 - Select files
-2 - Click on the “create new history” button. 
+
+2 - Click on the “create new history” button.
 
 By default project name and date are used to create the new history name, user can add a suffix to custom this name.
 
