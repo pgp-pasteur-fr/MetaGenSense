@@ -173,20 +173,24 @@ def galaxy_history_detail(request, project, gi, history_id):
     
     for wk_obj in wkfs:
         wf = gi.workflows.show_workflow(wk_obj.wf_key)
-        i_inputs = wf['inputs'].keys()
-        wk_obj.nb_input = len(i_inputs)
-        
+        err = wk.get("err_msg")
+        if err:
+            return render (request, 'galaxy/datasets.html', {'histories': histories,
+                                                             'message': "Please select file(s)" })
+        else:
+            i_inputs = wf['inputs'].keys()
+            wk_obj.nb_input = len(i_inputs)
+    
     if gi :
         hist_info = gi.histories.show_history(history_id, contents=False, deleted=False)
         history_content = gi.histories.show_history(history_id , contents=True, deleted=False)
-        
+    
         print hist_info
         # trop lent: 
         # details_file = []
         # for i in history_content:  
         #    details_file.append(gi.datasets.show_dataset(i['id']))
-        
-            
+    
         # ajout la description status dans les details des fichiers 
         for key, values in hist_info['state_ids'].iteritems():
             for history_file in history_content:
