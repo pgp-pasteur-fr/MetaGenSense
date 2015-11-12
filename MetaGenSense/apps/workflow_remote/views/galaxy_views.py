@@ -173,7 +173,7 @@ def galaxy_history_detail(request, project, gi, history_id):
     
     for wk_obj in wkfs:
         wf = gi.workflows.show_workflow(wk_obj.wf_key)
-        err = wk.get("err_msg")
+        err = wf.get("err_msg")
         if err:
             return render (request, 'galaxy/datasets.html', {'histories': histories,
                                                              'message': "Please select file(s)" })
