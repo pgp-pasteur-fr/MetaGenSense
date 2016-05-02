@@ -290,7 +290,7 @@ def save_file_information(request, project, gi, file_id):
 @project_required
 @connection_galaxy
 def export_output(request, project, gi, file_id, tool_id="export_sbw"):
-    """Export data in galaxy synbiowatch output directory"""
+    """Export data in galaxy MetaGenSense output directory"""
     """add the name of project on file name"""
     
     data = gi.datasets.show_dataset(dataset_id=file_id)
