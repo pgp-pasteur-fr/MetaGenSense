@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from os import path, remove
 import zipfile
+from os import path, remove
 
 from django import forms
 from django.conf import settings

@@ -1,12 +1,12 @@
+from django.conf import settings
 from django.conf.urls import patterns, url
 from django.views.generic.base import RedirectView
-from views.galaxy_views import workflow_datasets, galaxydir_to_dataset, galaxy_history_detail, download_file
-from views.galaxy_views import export_output, save_file_information, galaxy_history_list, get_galaxy_dataset,remove_library_dataset
-from views.galaxy_launch_workflow_views import launch_workflow
-from views.run_workflow import run_workflow_list
-from views.galaxy_user_views import galaxy_user_update, galaxy_users
 
-from django.conf import settings
+from views.galaxy_launch_workflow_views import launch_workflow
+from views.galaxy_user_views import galaxy_user_update, galaxy_users
+from views.galaxy_views import export_output, save_file_information, galaxy_history_list, get_galaxy_dataset,remove_library_dataset
+from views.galaxy_views import workflow_datasets, galaxydir_to_dataset, galaxy_history_detail, download_file, upload_file_to_history
+from views.run_workflow import run_workflow_list
 
 print settings.WORKFLOW_MANAGEMENT_SYSTEM
 
@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     
     #url to use galaxy
     url(r'^workflows/galaxy/$', workflow_datasets, name="galaxy_workflow"),
+    url(r'^workflows/galaxy/upload_file_to_history/$', upload_file_to_history, name="upload_file_to_history"),
     url(r'^workflows/galaxy/import_galaxydir/$', galaxydir_to_dataset, name="import_galaxydir"),
     url(r'^workflows/galaxy/remove_library_dataset/(?P<dataset_id>[\w-]+)$', remove_library_dataset, name="remove_library_dataset"), 
     url(r'^workflows/galaxy/launch/$',launch_workflow, name='galaxy_workflow_launch'),

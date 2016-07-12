@@ -2,9 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, render_to_response
 
+from project_views import project_required
 from ..forms import GpsCoordsForm, SampleForm, GeographicLocationForm
 from ..models import Sample, Project, GeographicLocation, GpsCoords
-from project_views import project_required
 
 
 @project_required

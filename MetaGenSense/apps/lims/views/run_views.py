@@ -2,9 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 
+from project_views import project_required
 from ..forms import RunForm
 from ..models import Run, LibraryPreparation
-from project_views import project_required
 
 
 @project_required

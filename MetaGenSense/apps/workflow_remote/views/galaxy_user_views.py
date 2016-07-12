@@ -1,12 +1,12 @@
 # -*- coding: Utf-8 -*-
-from ..models import GalaxyUser
+from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic import UpdateView, ListView
 
+from ..libs.galaxyModule import MGSGalaxyInstance
+from ..models import GalaxyUser
 
-from ..libs.galaxyModule import SBWGalaxyInstance
-from django.conf import settings
 
 class galaxy_user_update(SuccessMessageMixin, UpdateView):
     
@@ -35,7 +35,7 @@ class galaxy_users(ListView):
         l = []
         for user in galaxy_users :
           
-            gi = SBWGalaxyInstance(url=settings.GALAXY_SERVER_URL, key=user.api_key)
+            gi = MGSGalaxyInstance(url=settings.GALAXY_SERVER_URL, key=user.api_key)
             try:
                 gu_info = gi.users.get_current_user()
                 l.append(gu_info['username'])

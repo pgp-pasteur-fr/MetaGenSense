@@ -6,6 +6,7 @@
 
 {% block content %}
 <h3>Welcome Galaxy User</h3>
+    <div class=info></div><p>You are connected at <a href="{{ object.galaxy_url}}">{{ object.galaxy_url}}</a><p>
 	<div class=info></div>Please to set up your API Key (see the Galaxy docs to generate an API Key )
 	<section>
 	<form action="" method="post">{% csrf_token %}

@@ -2,9 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
+from project_views import project_required
 from ..forms import RawDataForm, UploadFileForm
 from ..models import RawData, LibraryPreparation, FileInformation
-from project_views import project_required
 
 
 @project_required

@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 import os
 import sys
-import django.conf.global_settings as DEFAULT_SETTING
 
+import django.conf.global_settings as DEFAULT_SETTING
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -28,7 +28,7 @@ WK_EXPORT_DIR = '/opt/MGS/outputs'
 #Path to access to Galaxy personal import directory form server
 GALAXY_INPUT_DIR ='/pasteur/projets/common/galaxy/links'
 MGS_GALAXY_FOLDER = '/MGS' #absolute path
-GALAXY_SERVER_URL ='https://galaxyapi.web.pasteur.fr/'
+GALAXY_SERVER_URL ='http://localhost:8080/'
 
 #Path to store upload file 
 MGS_UPLOAD_FILE_DIR = os.path.join(os.path.sep,'opt','metagensense','limsfiles')

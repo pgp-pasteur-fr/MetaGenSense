@@ -1,10 +1,9 @@
 from django.conf.urls import patterns, url
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, TemplateView
 
 from models import FileInformation
 from views import sample_views, project_views, library_prep_views, run_views, raw_data_views
-
-from django.contrib.auth.decorators import login_required
 
 urlpatterns = patterns('',
 								

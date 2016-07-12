@@ -1,22 +1,35 @@
 # -*-coding:Utf-8 -*
 
-from bioblend.galaxy import GalaxyInstance 
-import time
 import os
-import logging
+import time
 
-class SBWGalaxyInstance(GalaxyInstance):    
+from bioblend.galaxy import GalaxyInstance
+
+
+class MGSGalaxyInstance(GalaxyInstance):
     """to custom bioblend request for MGS"""
     
     def __init__(self, url, key):                
         GalaxyInstance.__init__(self, url, key)   
         
         self.galaxy_input_path = ''
-        self.library_name = '' #library to store data folder
+        self.library_name = 'MGS' #library to store data folder
         self.MGS_folder = ''   #name folder to store library of MetaGenSense in galaxy  
         self.roles = ''
+        self.library_id = self.get_library_id()
 
-       
+    def get_library_id(self):
+
+        libraries = self.libraries.get_libraries(name=self.library_name)
+        # recupere l'id de la 1ere library de l'utilisateur
+        if not libraries:
+            libraries = self.libraries.get_libraries()
+        try:
+            return libraries[0].get("id")
+        except:
+            "You need to configure Galaxy Library"
+
+
     def display_folders(self, library_id, project):
         "Retourne le contenu du dossier du projet situé dans le reperoire MetaGenSense de Galaxy "
         

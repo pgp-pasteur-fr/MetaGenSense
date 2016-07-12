@@ -3,7 +3,6 @@ from django.contrib import admin
 
 from views import list_files, display, delete_file_info, download
 
-
 # Uncomment the next two lines to enable the admin:
 admin.autodiscover()
 

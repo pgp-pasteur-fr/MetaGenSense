@@ -1,23 +1,23 @@
 # -*- coding: Utf-8 -*-
 import os
-from django.shortcuts import render, render_to_response, redirect, HttpResponseRedirect
-import urllib2, urllib, urlparse
+import urllib
+import urllib2
+import urlparse
+import tempfile
+import time
+
+from bioblend.galaxy.tools.inputs import inputs, dataset
 from django.conf import settings
-
-from django.core.files.base import ContentFile 
 from django.contrib import messages
-
 from django.contrib.auth.decorators import login_required
+from django.core.files.base import ContentFile
+from django.shortcuts import render, render_to_response, redirect, HttpResponseRedirect
 from django.template import RequestContext
 
 from MetaGenSense.apps.lims.models import FileInformation, Project
 from MetaGenSense.apps.lims.views.project_views import project_required
-
-from ..models import GalaxyUser, Workflow , RunWorkflow, WorkflowData
-from ..libs.galaxyModule import SBWGalaxyInstance
-
-from bioblend.galaxy.tools.inputs import inputs, dataset
-
+from ..libs.galaxyModule import MGSGalaxyInstance
+from ..models import GalaxyUser, Workflow, RunWorkflow, WorkflowData
 
 
 def connection_galaxy(func):
@@ -29,12 +29,12 @@ def connection_galaxy(func):
         if not gu.api_key:
             return redirect('galaxy_account')
         
-        gi = SBWGalaxyInstance(url=settings.GALAXY_SERVER_URL, key=gu.api_key)
+        gi = MGSGalaxyInstance(url=settings.GALAXY_SERVER_URL, key=gu.api_key)
         
         try:
             gu_info = gi.users.get_current_user()
     
-        except : 
+        except:
             return redirect('galaxy_account')  # "Provided API key is not valid.
         
         # personnal folder
@@ -48,7 +48,7 @@ def connection_galaxy(func):
         
         return func(request, project, gi, *args, **kwargs)
     
-    return  wrapper 
+    return wrapper
   
 
 @login_required
@@ -59,24 +59,24 @@ def galaxydir_to_dataset(request, project=None, gi=None):
     """
     msg = "Not ajax"
     if request.is_ajax():
-        library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id'] 
-        dataset = gi.get_or_create_dataset(project, library_id)
+
+        dataset = gi.get_or_create_dataset(project, gi.library_id)
         
         for data in dataset:  
             # recupere l'id du folder du projet
             if (data['type'] == 'folder') and (project == data['name'].split('/')[-1]):
                 
                 try:
-                    importedfiles = gi.import_file_to_galaxy(library_id, data['id'], project)    
+                    importedfiles = gi.import_file_to_galaxy(gi.library_id, data['id'], project)
                 except Exception, e :
                     print e 
                     messages.add_message(request, messages.WARNING,
-                                        "Please put file(s) into your galaxy links directory at: \n%s"%(
-                    				    os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
+                                         "Please put file(s) into your galaxy links directory at: \n%s" % (
+                                             os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
                   
                     return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
                          
-                dataset = gi.display_folders(library_id, project)
+                dataset = gi.display_folders(gi.library_id, project)
                 
                 # format names 
                 for data in dataset:
@@ -100,8 +100,7 @@ def remove_library_dataset(request, dataset_id, project=None, gi=None):
     """
         delete "overimported" dataset
     """
-    library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id']
-    gi.libraries.delete_library_dataset(library_id, dataset_id, purged=False)
+    gi.libraries.delete_library_dataset(gi.library_id, dataset_id, purged=False)
     
     return redirect('workflow_datasets')
 
@@ -111,12 +110,12 @@ def remove_library_dataset(request, dataset_id, project=None, gi=None):
 @project_required
 @connection_galaxy
 def workflow_datasets(request, project=None, gi=None):
-    """Display global view with list of histories; list of dataset to import data in history"""
-    """gi = galaxy instance"""
+    """Display global view with list of histories; list of dataset to import data in history
+     - gi : galaxy instance"""
     
     dataset = ''
     histories = ''
-    library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id']   
+
     histories = gi.histories.get_histories()  
               
     # import les donnees dans l'historique de l'utilisateur
@@ -124,14 +123,14 @@ def workflow_datasets(request, project=None, gi=None):
         selected_files = request.POST.getlist('file')
         suffix = request.POST.get('newhistoryname', "")
         if selected_files:
-            history_id = gi.import_dataset_to_history(project, library_id, selected_files, suffix)
+            history_id = gi.import_dataset_to_history(project, gi.library_id, selected_files, suffix)
             
             return redirect('galaxy_history_detail', history_id)
         
         else:
             
             return render (request, 'galaxy/datasets.html', {'histories': histories,
-                                                               'message': "Please select file(s)" })
+                                                             'message': "Please select file(s)" })
 
   
     # TODO supprimer les historiques qui ne concernent pas le projet
@@ -146,10 +145,8 @@ def workflow_datasets(request, project=None, gi=None):
 def get_galaxy_dataset(request, project, gi):
     """Ajax fct call by workflow_datasets page"""
     if request.is_ajax():    
-                    
-            # recupere l'ID de la 1ere library de l'utilisateur
-            library_id = gi.libraries.get_libraries(name=gi.library_name)[0]['id']
-            dataset = gi.get_or_create_dataset(project, library_id)
+
+            dataset = gi.get_or_create_dataset(project, gi.library_id)
                 
             # format names 
             for data in dataset:
@@ -175,7 +172,7 @@ def galaxy_history_detail(request, project, gi, history_id):
         wf = gi.workflows.show_workflow(wk_obj.wf_key)
         err = wf.get("err_msg")
         if err:
-            return render (request, 'galaxy/datasets.html', {'histories': histories,
+            return render(request, 'galaxy/datasets.html', {'histories': gi.histories.get_histories(),
                                                              'message': "Please select file(s)" })
         else:
             i_inputs = wf['inputs'].keys()
@@ -306,9 +303,18 @@ def export_output(request, project, gi, file_id, tool_id="export_sbw"):
         
     return redirect('galaxy_history_detail', history_id=hist_id)
 
-    
-    
-    
-    
-    
-    
+
+@login_required
+@project_required
+@connection_galaxy
+def upload_file_to_history(request, project, gi ):
+    """
+        Upload file into Galaxy Server
+    """
+
+    tmpfile = tempfile.NamedTemporaryFile()
+    tmpfile.write(request.FILES["uploadfile"].read())
+    history_id = gi.histories.create_history(name=project + '_' + time.strftime("%d-%m-%Y")).get("id")
+    hist = gi.tools.upload_file(tmpfile.name, history_id, file_name=request.FILES["uploadfile"].name)
+
+    return redirect('galaxy_history_detail', history_id)

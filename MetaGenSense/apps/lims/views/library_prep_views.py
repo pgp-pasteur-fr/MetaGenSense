@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from ..forms import LibraryPreparationForm 
-from ..models import LibraryPreparation, Sample
-from project_views import auth_project
 from project_views import project_required
+from ..forms import LibraryPreparationForm
+from ..models import LibraryPreparation, Sample
+
 
 @project_required
 @login_required
@@ -67,4 +67,4 @@ def projectLibraryPrepList(request, project):
     
     libs_prep = LibraryPreparation.objects.filter(sample__project=my_project)
     return render(request, 'library_prep/list.html', {'libraries':libs_prep}) 
-                                                           
+

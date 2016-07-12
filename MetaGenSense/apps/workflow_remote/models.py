@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+
 from MetaGenSense.apps.lims.models import User, FileInformation, Project
+from django.conf import settings
 
 class GalaxyUser(models.Model):
     """
@@ -8,7 +10,10 @@ class GalaxyUser(models.Model):
     """
     user = models.OneToOneField(User, primary_key=True)
     api_key = models.CharField(max_length=100,blank=True)
-    
+
+    def galaxy_url(self):
+        return settings.GALAXY_SERVER_URL
+
     def __unicode__(self):
         return self.user.username
     

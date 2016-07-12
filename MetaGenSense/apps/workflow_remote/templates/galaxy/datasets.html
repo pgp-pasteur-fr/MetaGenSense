@@ -107,11 +107,17 @@
 		</form>
 	</section>
 	
-	<section><p>Put new files into Galaxy from 'Links' repository</p>
+	<section><p>Put new files into Galaxy from 'Links' repository (file > 1Go)</p>
 		<div id=wait_id></div>
-		<button id=import_btn onclick="this.disabled=true; import_new_file();">Import new files</button>
+		    <button id=import_btn onclick="this.disabled=true; import_new_file();">Import new files</button>
 		<div id=imported_filed></div>
 	</section>
-	
-	
-{% endblock %}	
+
+    <section><p>Upload files into Galaxy (file < 1Go)</p>
+        <form enctype="multipart/form-data" action="{%  url 'upload_file_to_history' %}" method="post">
+            {% csrf_token %}
+		     <input type="file" id="uploadfile" name="uploadfile"/>
+             <input type="submit" value="Create new history"/>
+        </form>
+	</section>
+{% endblock %}
