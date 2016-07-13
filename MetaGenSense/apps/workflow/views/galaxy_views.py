@@ -71,7 +71,7 @@ def galaxydir_to_dataset(request, project=None, gi=None):
                         print e
                         messages.add_message(request, messages.WARNING,
                                              "Please put file(s) into your galaxy links directory at: \n%s" % (
-                                                 os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
+                                              os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
 
                         return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
 
@@ -321,7 +321,8 @@ def upload_file_to_history(request, project, gi):
         if form.is_valid():
             myfile = form.cleaned_data['file_field']
             tmpfile = tempfile.NamedTemporaryFile()
-            tmpfile.write(myfile.read())
+            for chunk in myfile.chunks():
+                tmpfile.write(chunk)
 
             #naive methode datetime
             history_id = gi.histories.create_history(name=project + '_' + time.strftime("%d-%m-%Y %H:%M:%S")).get("id")
