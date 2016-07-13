@@ -20,6 +20,7 @@ from ..libs.galaxyModule import MGSGalaxyInstance
 from ..models import GalaxyUser, Workflow, RunWorkflow, WorkflowData
 from ..forms import UploadForm
 
+
 def connection_galaxy(func):
     """Initiating Galaxy connection"""
     def wrapper(request, project=None, *args, **kwargs):
@@ -323,10 +324,11 @@ def upload_file_to_history(request, project, gi):
             tmpfile = tempfile.NamedTemporaryFile()
             for chunk in myfile.chunks():
                 tmpfile.write(chunk)
-
+            tmpfile.flush()
             #naive methode datetime
             history_id = gi.histories.create_history(name=project + '_' + time.strftime("%d-%m-%Y %H:%M:%S")).get("id")
             hist = gi.tools.upload_file(tmpfile.name, history_id, file_name=myfile.name)
+            tmpfile.close()
 
         return redirect('galaxy_history_detail', history_id)
     else:
