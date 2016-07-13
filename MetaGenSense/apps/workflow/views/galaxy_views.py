@@ -59,35 +59,36 @@ def galaxydir_to_dataset(request, project=None, gi=None):
     """
     msg = "Not ajax"
     if request.is_ajax():
+        if gi.library_id:
+            dataset = gi.get_or_create_dataset(project, gi.library_id)
+            for data in dataset:
+                # recupere l'id du folder du projet
+                if (data['type'] == 'folder') and (project == data['name'].split('/')[-1]):
 
-        dataset = gi.get_or_create_dataset(project, gi.library_id)
-        
-        for data in dataset:  
-            # recupere l'id du folder du projet
-            if (data['type'] == 'folder') and (project == data['name'].split('/')[-1]):
-                
-                try:
-                    importedfiles = gi.import_file_to_galaxy(gi.library_id, data['id'], project)
-                except Exception, e :
-                    print e 
-                    messages.add_message(request, messages.WARNING,
-                                         "Please put file(s) into your galaxy links directory at: \n%s" % (
-                                             os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
-                  
-                    return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
-                         
-                dataset = gi.display_folders(gi.library_id, project)
-                
-                # format names 
-                for data in dataset:
-                    if data['type'] == 'file':
-                        tmp = data['name'].rsplit('/', 1)
-                        data['name'] = tmp[-1]
-            
-                return render_to_response("galaxy/includes/dataset.html", {'dataset':dataset, 'importedfiles':importedfiles})
+                    try:
+                        importedfiles = gi.import_file_to_galaxy(gi.library_id, data['id'], project)
+                    except Exception, e:
+                        print e
+                        messages.add_message(request, messages.WARNING,
+                                             "Please put file(s) into your galaxy links directory at: \n%s" % (
+                                                 os.path.join(gi.galaxy_input_path, gi.MGS_folder, project)))
+
+                        return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
+
+                    dataset = gi.display_folders(gi.library_id, project)
+
+                    # format names
+                    for data in dataset:
+                        if data['type'] == 'file':
+                            tmp = data['name'].rsplit('/', 1)
+                            data['name'] = tmp[-1]
+
+                    return render_to_response("galaxy/includes/dataset.html", {'dataset':dataset, 'importedfiles':importedfiles})
+            else:
+                msg = "dataset is empty or not does not contenain %s folder" %(project)
         else:
-            msg = "dataset is empty or not does not contenain %s folder" %(project)
-    
+            msg = "You need to configure Galaxy Library"
+
     messages.add_message(request, messages.WARNING, msg)
     return render_to_response("galaxy/includes/dataset.html", context_instance=RequestContext(request))
 

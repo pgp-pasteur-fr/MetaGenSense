@@ -26,8 +26,8 @@ class MGSGalaxyInstance(GalaxyInstance):
             libraries = self.libraries.get_libraries()
         try:
             return libraries[0].get("id")
-        except:
-            "You need to configure Galaxy Library"
+        except Exception:
+            return None
 
 
     def display_folders(self, library_id, project):
@@ -89,9 +89,9 @@ class MGSGalaxyInstance(GalaxyInstance):
             parent_folder = self.mgs_create_folder(library_id, parent_folder_path, folders)  
 
         newfolder = self.libraries.create_folder(library_id=library_id,
-        					 folder_name=folder_name,
-        					 base_folder_id=parent_folder['id'],
-        					 )
+                                                 folder_name=folder_name,
+                                                 base_folder_id=parent_folder['id'],
+                                                 )
         return newfolder[0]
                 
     
@@ -125,7 +125,7 @@ class MGSGalaxyInstance(GalaxyInstance):
        
     def import_dataset_to_history(self, project, library_id, dataset_id, suffix=""):
         
-        # TODO rajouter des filtres
+        # TODO rajouter des filtres + timezone
         # test si l'historique deja cree
         if suffix:
             suffix = '_' + suffix
