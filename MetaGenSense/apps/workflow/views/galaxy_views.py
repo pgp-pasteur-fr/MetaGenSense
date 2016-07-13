@@ -129,14 +129,11 @@ def workflow_datasets(request, project=None, gi=None):
         suffix = request.POST.get('newhistoryname', "")
         if selected_files:
             history_id = gi.import_dataset_to_history(project, gi.library_id, selected_files, suffix)
-            
             return redirect('galaxy_history_detail', history_id)
         
         else:
-            
             return render(request, 'galaxy/datasets.html', {'histories': histories,
                                                              'message': "Please select file(s)"})
-
   
     # TODO supprimer les historiques qui ne concernent pas le projet
             
@@ -147,21 +144,23 @@ def workflow_datasets(request, project=None, gi=None):
           
 @login_required
 @project_required
-@connection_galaxy  
+@connection_galaxy
 def get_galaxy_dataset(request, project, gi):
     """Ajax fct call by workflow_datasets page"""
-    if request.is_ajax():    
-
+    dataset = ""
+    if request.is_ajax():
+        if gi.library_id:
             dataset = gi.get_or_create_dataset(project, gi.library_id)
-                
+
             # format names 
             for data in dataset:
                 if data['type'] == 'file':
                     tmp = data['name'].rsplit('/', 1)
                     data['name'] = tmp[-1]
-        
-    
-    return render (request, 'galaxy/includes/dataset.html', {'dataset':dataset})
+        else:
+            messages.add_message(request, messages.WARNING, "You need to configure Galaxy Library")
+
+    return render(request, 'galaxy/includes/dataset.html', {'dataset': dataset})
     
 @login_required
 @project_required
