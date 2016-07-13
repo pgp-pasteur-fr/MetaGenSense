@@ -65,7 +65,7 @@ INSTALLED_APPS = (
     # Apps on MetaGenSense
     'MetaGenSense.apps.lims',
     'MetaGenSense.apps.usermanagement',
-    'MetaGenSense.apps.workflow_remote',
+    'MetaGenSense.apps.workflow',
     'MetaGenSense.apps.analyse',  
     
 )

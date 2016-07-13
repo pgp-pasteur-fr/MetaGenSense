@@ -18,7 +18,7 @@ from MetaGenSense.apps.lims.models import FileInformation, Project
 from MetaGenSense.apps.lims.views.project_views import project_required
 from ..libs.galaxyModule import MGSGalaxyInstance
 from ..models import GalaxyUser, Workflow, RunWorkflow, WorkflowData
-
+from ..forms import UploadForm
 
 def connection_galaxy(func):
     """Initiating Galaxy connection"""
@@ -110,8 +110,12 @@ def remove_library_dataset(request, dataset_id, project=None, gi=None):
 @project_required
 @connection_galaxy
 def workflow_datasets(request, project=None, gi=None):
-    """Display global view with list of histories; list of dataset to import data in history
-     - gi : galaxy instance"""
+    """Display global view display
+     - list of histories
+     - list of dataset to import data in history
+     - upload file forms
+     :param project : current project
+     :param gi : galaxy instance"""
     
     dataset = ''
     histories = ''
@@ -129,14 +133,15 @@ def workflow_datasets(request, project=None, gi=None):
         
         else:
             
-            return render (request, 'galaxy/datasets.html', {'histories': histories,
-                                                             'message': "Please select file(s)" })
+            return render(request, 'galaxy/datasets.html', {'histories': histories,
+                                                             'message': "Please select file(s)"})
 
   
     # TODO supprimer les historiques qui ne concernent pas le projet
             
-    return render (request, 'galaxy/datasets.html', {'histories': histories,
-                                                       'message': "" })
+    return render(request, 'galaxy/datasets.html', {'histories': histories,
+                                                     'message': "",
+                                                     'uploadform': UploadForm()})
        
           
 @login_required
@@ -307,14 +312,21 @@ def export_output(request, project, gi, file_id, tool_id="export_sbw"):
 @login_required
 @project_required
 @connection_galaxy
-def upload_file_to_history(request, project, gi ):
+def upload_file_to_history(request, project, gi):
     """
         Upload file into Galaxy Server
     """
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            myfile = form.cleaned_data['file_field']
+            tmpfile = tempfile.NamedTemporaryFile()
+            tmpfile.write(myfile.read())
 
-    tmpfile = tempfile.NamedTemporaryFile()
-    tmpfile.write(request.FILES["uploadfile"].read())
-    history_id = gi.histories.create_history(name=project + '_' + time.strftime("%d-%m-%Y")).get("id")
-    hist = gi.tools.upload_file(tmpfile.name, history_id, file_name=request.FILES["uploadfile"].name)
+            #naive methode datetime
+            history_id = gi.histories.create_history(name=project + '_' + time.strftime("%d-%m-%Y %H:%M:%S")).get("id")
+            hist = gi.tools.upload_file(tmpfile.name, history_id, file_name=myfile.name)
 
-    return redirect('galaxy_history_detail', history_id)
+        return redirect('galaxy_history_detail', history_id)
+    else:
+        return redirect(request.META.get('HTTP_REFERER'), request)

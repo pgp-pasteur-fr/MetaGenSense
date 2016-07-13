@@ -11,8 +11,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from MetaGenSense.apps.lims.models import FileInformation
 from MetaGenSense.apps.lims.views.project_views import project_required
-from MetaGenSense.apps.workflow_remote.models import WorkflowData
-from MetaGenSense.apps.workflow_remote.views.galaxy_views import connection_galaxy
+from MetaGenSense.apps.workflow.models import WorkflowData
+from MetaGenSense.apps.workflow.views.galaxy_views import connection_galaxy
 
 
 @login_required

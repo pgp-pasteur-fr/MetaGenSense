@@ -5,23 +5,23 @@
 	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/histories.css" media="screen" />
 	<link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/detail.css" media="screen" />
 	<!--link rel="stylesheet" type="text/css"  href="{{ STATIC_URL }}css/forms.css" media="screen" /-->
-	
+
 	<script type="text/javascript">
-	
+
 		function create_request(url, asc){
 
 			var request = null;
-			if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari 
+			if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 				request = new XMLHttpRequest();}
 			else{// code for IE6, IE5
 				request=new ActiveXObject("Microsoft.XMLHTTP");}
-			
+
 			request.open('POST',url, asc );
 			request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 			request.setRequestHeader('X-Requested-With','XMLHttpRequest');/**to use 'is_ajax' Django fct**/
 			return request;
-		}		
-		
+		}
+
 	    function getCookie(c_name)
 	    {
 	        if (document.cookie.length > 0)
@@ -37,7 +37,7 @@
 	        }
 	        return "";
 	     }
-	    
+
 	    var dataset_request = null;
 	    function get_dataset()
 		{
@@ -46,7 +46,7 @@
 			dataset_request.onreadystatechange = refresh_dataset;
 			dataset_request.send("&csrfmiddlewaretoken="+getCookie("csrftoken"));
 		}
-	    
+
 	    var import_request = null;
 	    function import_new_file()
 		{
@@ -56,7 +56,7 @@
 			import_request.onreadystatechange = refresh_import_new_files;
 			import_request.send("&csrfmiddlewaretoken="+getCookie("csrftoken"));
 		}
-	    
+
 	   function refresh_import_new_files() {
 		 if (import_request.readyState == 4) {
 			var reponse = import_request.responseText;
@@ -64,36 +64,37 @@
 			var wait = document.getElementById('wait_id').innerHTML = " ";
 				}
 	  		}
-	   
+
 	   function refresh_dataset() {
 		if (dataset_request.readyState == 4) {
 			var reponse = dataset_request.responseText;
 			var selectElmt = document.getElementById('dataset').innerHTML = reponse;
 				}
 		  	}
-	  
-	    </script>	
-	
+
+	    </script>
+
 {% endblock %}
 
 {% block content %}
 <h3>Workflows<div style="float:right;"><a title="change the account galaxy api key"  href="account"><img src="/static/css/images/setting.png"></a></div></h3>
-	
+
 	{% if messages %}
 		{% for message in messages %}
 			{% ifequal message.tags|stringformat:"s" 'warning' %}
-			<ul class="messages">    
+			<ul class="messages">
 	    		<li class="{{ message.tags }}"><h4>{{ message }}</h4></li>
 			</ul>
 			{% endifequal %}
 		{% endfor %}
 	{% endif %}
-	
+
 	<section id=histories>
 		{% include "galaxy/includes/histories.html" %}
 	</section>
-	
+
 	<section id=sect_dataset>
+        <p>Create new history from library selected file(s):</p>
 		<form action="" method="POST">
 			{% csrf_token %}
 			<div id=dataset >
@@ -102,22 +103,25 @@
 				<script type="text/javascript">
 						get_dataset();
 				</script>
-			<button type="submit" value="Create new history">Create new history</button>
-			<input type=button name=newhistoryname value="add suffix" onclick="this.type='text'; this.value='';">
+            <input type=button name=newhistoryname value="add suffix" onclick="this.type='text'; this.value='';">
+			<button type="submit" value="Create">Create</button>
 		</form>
+
 	</section>
-	
-	<section><p>Put new files into Galaxy from 'Links' repository (file > 1Go)</p>
+
+	<section>
+        <p>Add new files into Galaxy Library from 'Links' repository (file > 1Go)</p>
 		<div id=wait_id></div>
 		    <button id=import_btn onclick="this.disabled=true; import_new_file();">Import new files</button>
 		<div id=imported_filed></div>
 	</section>
 
-    <section><p>Upload files into Galaxy (file < 1Go)</p>
+    <section><p></p>
+        <p>Create new history from Upload files into Galaxy (file < 1Go)</p>
         <form enctype="multipart/form-data" action="{%  url 'upload_file_to_history' %}" method="post">
             {% csrf_token %}
-		     <input type="file" id="uploadfile" name="uploadfile"/>
-             <input type="submit" value="Create new history"/>
+            {{ uploadform }}
+             <button type="submit" value="Create">Create</button>
         </form>
 	</section>
 {% endblock %}
