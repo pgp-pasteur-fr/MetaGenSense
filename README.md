@@ -58,17 +58,17 @@ Installation
          - MGS_GALAXY_FOLDER = '/MGS' #absolute path to Galaxy library (directory inside links)
     
 
-     Path where to store uploaded files:
+     Path where to store downloaded files:
 
-         MGS_UPLOAD_FILE_DIR = os.path.join(os.path.sep,'opt','metagensense','limsfiles')
+         MGS_DOWNLOAD_FILE_DIR = os.path.join(os.path.sep,'opt','metagensense','limsfiles')
 
      Folder to save analyse results on the server:
 
          ANALYSE_FOLDER = 'analyse'
 
-     Folder use to export big data by MetaGenSense (>2Gb)':
+     Folder use to export big data form GALAXY (>2Gb)':
 
-         WK_EXPORT_DIR = '/opt/MGS/outputs'
+         GALAXY_EXPORT_DIR = '/opt/MGS/outputs'
 
 
    d. Initialize the database

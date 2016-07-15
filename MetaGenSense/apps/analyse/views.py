@@ -24,7 +24,7 @@ def list_files(request, project=None, gi=None):
     class PersonalPathForm(forms.Form):
         """fichier dans le repertoire personnel d'export d'output"""
         
-        _path = path.join(settings.WK_EXPORT_DIR, gi.roles)   
+        _path = path.join(settings.GALAXY_EXPORT_DIR, gi.roles)
         personal_files = forms.FilePathField(path=_path , match=project + '_.*',
                                              widget=SelectMultiple)
         

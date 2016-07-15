@@ -17,27 +17,40 @@ import django.conf.global_settings as DEFAULT_SETTING
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-LOGIN_URL = "/login"
-LOGIN_REDIRECT_URL = "/home"
-
-
-#Workflow application use by MetaGensense
-WORKFLOW_MANAGEMENT_SYSTEM = 'Galaxy'
-WK_EXPORT_DIR = '/opt/MGS/outputs'
-
-#Path to access to Galaxy personal import directory form server
-GALAXY_INPUT_DIR ='/pasteur/projets/common/galaxy/links'
-MGS_GALAXY_FOLDER = '/MGS' #absolute path
-GALAXY_SERVER_URL ='http://localhost:8080/'
-
-#Path to store upload file 
-MGS_UPLOAD_FILE_DIR = os.path.join(os.path.sep,'opt','metagensense','limsfiles')
-#folder to save analyse on the server
-ANALYSE_FOLDER= 'analyse'
-
 #Python Path for Reusable Django Apps
 sys.path.insert(0, PROJECT_PATH )
 
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/home"
+
+#Workflow application use by MetaGensense
+WORKFLOW_MANAGEMENT_SYSTEM = 'Galaxy'
+
+#Galaxy server
+GALAXY_SERVER_URL ='http://localhost:8080/'
+
+#Absolute Path to access to Galaxy personal import directory form server
+#example : /../galaxy/links/
+GALAXY_INPUT_DIR ='~/galaxy/links'
+
+#Absolute Path of Big files exported by Galaxy
+#for example Galaxy filesystem mounted
+GALAXY_EXPORT_DIR = '~/galaxy/outputs'
+
+#Absolute path to Galaxy Library folder
+MGS_GALAXY_FOLDER = '/MGS'
+
+#Path to store galaxy retrieved files
+MGS_DOWNLOAD_FILE_DIR = '~/MetaGenSense'
+
+#Name or path to folder where analysis files will be saved on the server
+#by default the path is MGS_DOWNLOAD_FILE_DIR + ANALYSE_FOLDER + project_name
+
+ANALYSE_FOLDER= 'analyse'
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+MEDIA_ROOT = MGS_DOWNLOAD_FILE_DIR
+FILE_UPLOAD_PERMISSIONS= 0664
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -61,13 +74,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Apps on MetaGenSense
     'MetaGenSense.apps.lims',
     'MetaGenSense.apps.usermanagement',
     'MetaGenSense.apps.workflow',
-    'MetaGenSense.apps.analyse',  
-    
+    'MetaGenSense.apps.analyse',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,22 +121,18 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = MGS_UPLOAD_FILE_DIR
-FILE_UPLOAD_PERMISSIONS= 0664
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 ADMIN_MEDIA_PREFIX = '/static/'
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-STATICFILES_DIRS = (              
+STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_PATH, 'static'),
-    
+
 )
 
 # List of finder classes that know how to find static files in
@@ -146,7 +155,7 @@ TEMPLATE_LOADERS = (
     #'django.template.loaders.eggs.Loader',
 )
 
-TEMPLATE_DIRS = (                 
+TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

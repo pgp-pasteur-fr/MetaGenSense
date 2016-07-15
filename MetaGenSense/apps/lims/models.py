@@ -8,14 +8,21 @@ from django.db import models
 
 
 def get_file_path(instance, filename):
-    # make the filepath include the signed in username
-    print "inst: %s" % instance.__dict__.keys()
+    """
+
+    :param instance: An instance of the model where the FileField is defined.
+    :param filename: he filename that was originally given to the file
+    :return: path
+    # file will be uploaded to MEDIA_ROOT/{path return}
+    """
+
+    print instance, type(instance)
     print "inst_path:%s" % instance._path
     print "file: %s" % filename
     
     if instance._path:
-        return "%s/%s/%s" % (settings.MEDIA_ROOT, instance._path, filename)
-    return "%s/%s" % (settings.MEDIA_ROOT, filename)
+        return  os.path.join(instance._path, filename)
+    return os.path.join(filename)
 
 
         
@@ -67,8 +74,7 @@ class FileInformation(models.Model):
         
         if not self.format:
             self.format = os.path.splitext(self.file_path.path)[1]    
- 
-        
+
         super(FileInformation, self).save(*arg, **kargs)
         
     def parent_folder(self):
