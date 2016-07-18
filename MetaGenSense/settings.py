@@ -23,25 +23,27 @@ sys.path.insert(0, PROJECT_PATH )
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/home"
 
+ROOT_DIR = os.environ['HOME']
+
 #Workflow application use by MetaGensense
 WORKFLOW_MANAGEMENT_SYSTEM = 'Galaxy'
 
 #Galaxy server
 GALAXY_SERVER_URL ='http://localhost:8080/'
 
-#Absolute Path to access to Galaxy personal import directory form server
-#example : /../galaxy/links/
-GALAXY_INPUT_DIR ='~/galaxy/links'
-
-#Absolute Path of Big files exported by Galaxy
-#for example Galaxy filesystem mounted
-GALAXY_EXPORT_DIR = '~/galaxy/outputs'
-
 #Absolute path to Galaxy Library folder
 MGS_GALAXY_FOLDER = '/MGS'
 
+#Absolute Path to access to Galaxy personal import directory form server
+#example : /../galaxy/links/
+GALAXY_INPUT_DIR = ROOT_DIR  +'/galaxy/links'
+
+#Absolute Path of Big files exported by Galaxy
+#for example Galaxy filesystem mounted
+GALAXY_EXPORT_DIR = ROOT_DIR +'/galaxy/outputs'
+
 #Path to store galaxy retrieved files
-MGS_DOWNLOAD_FILE_DIR = '~/MetaGenSense'
+MGS_DOWNLOAD_FILE_DIR = ROOT_DIR +'/MetaGenSense'
 
 #Name or path to folder where analysis files will be saved on the server
 #by default the path is MGS_DOWNLOAD_FILE_DIR + ANALYSE_FOLDER + project_name
