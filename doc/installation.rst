@@ -55,7 +55,7 @@ Set up this paths for you personal configuration/architecture .
 Paths to access to Galaxy personal import directory form server:
 
  - GALAXY_SERVER_URL = http://.... #url to your Galaxy server
- - GALAXY_INPUT_DIR = 'links'      #path to put data into Galaxy with import tool
+ - GALAXY_IMPORT_DIR = 'links'     #path to import data into Galaxy with import tool
  - MGS_GALAXY_FOLDER = '/MGS' #absolute path to Galaxy library (directory inside links)
 
 

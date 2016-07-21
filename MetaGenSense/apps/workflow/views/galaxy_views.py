@@ -42,7 +42,7 @@ def connection_galaxy(func):
         # personnal folder
         gi.roles = gu_info.get("email")
 
-        user_input_path = os.path.join(settings.GALAXY_INPUT_DIR, gi.roles)
+        user_input_path = os.path.join(settings.GALAXY_IMPORT_DIR, gi.roles)
 
         gi.library_name = gi.roles  # TODO add field in galaxyuser model
         gi.galaxy_input_path = user_input_path

@@ -36,7 +36,7 @@ MGS_GALAXY_FOLDER = '/MGS'
 
 #Absolute Path to access to Galaxy personal import directory form server
 #example : /../galaxy/links/
-GALAXY_INPUT_DIR = ROOT_DIR  +'/galaxy/links'
+GALAXY_IMPORT_DIR = ROOT_DIR + '/galaxy/links'
 
 #Absolute Path of Big files exported by Galaxy
 #for example Galaxy filesystem mounted
