@@ -14,7 +14,7 @@ class MGSGalaxyInstance(GalaxyInstance):
         
         self.galaxy_input_path = ''
         self.library_name = 'MGS' #library to store data folder
-        self.MGS_folder = ''   #name folder to store library of MetaGenSense in galaxy  
+        self.MGS_folder = ''      #name folder to store library of MetaGenSense in galaxy  
         self.roles = ''
         self.library_id = self.get_library_id()
 
@@ -53,14 +53,11 @@ class MGSGalaxyInstance(GalaxyInstance):
                 
         return project_folder
         
-        
     def get_folder_by_path(self, folders, folder_path):
         # take a list of folder return galaxy folder id or '' if not found
         for f in folders:
             if f['name'] == folder_path:
                 return f
-    
-    
     
     def mgs_create_folder(self, library_id, folder_path, folders=None):
         """
@@ -94,7 +91,6 @@ class MGSGalaxyInstance(GalaxyInstance):
                                                  )
         return newfolder[0]
                 
-    
     def get_or_create_dataset(self, project, library_id):
         """
         Retourne le contenu du dossier du projet situe dans le reperoire MetaGenSense de Galaxy
@@ -112,7 +108,6 @@ class MGSGalaxyInstance(GalaxyInstance):
             
         return project_folders
         
-       
     def import_file_to_galaxy(self, library_id, folder_id, project):
         """ Import file into galaxy in the library folder from link/'user'/"MetaGenSense"/project name
             Return list of imported files
@@ -122,7 +117,6 @@ class MGSGalaxyInstance(GalaxyInstance):
         print server_dir, self.galaxy_input_path, self.MGS_folder, project
         return self.libraries.upload_file_from_server(library_id, server_dir, folder_id=folder_id)
 
-       
     def import_dataset_to_history(self, project, library_id, dataset_id, suffix=""):
         
         # TODO rajouter des filtres + timezone
@@ -141,12 +135,11 @@ class MGSGalaxyInstance(GalaxyInstance):
 
         print 'history:', ghistory    
         
-        # self.histories.create_history_tag(history_id, 'SBW')
-        # self.histories.update_history(history_id,annotation="sbw")
+        # self.histories.create_history_tag(history_id, 'MGS')
+        # self.histories.update_history(history_id, annotation="MGS")
         
         for selectedfile in dataset_id:
-        
-            payload = {'from_ld_id':selectedfile , 'content': selectedfile, 'source': 'library', 'roles':self.roles}   
+            payload = {'from_ld_id': selectedfile, 'content': selectedfile, 'source': 'library', 'roles': self.roles}   
             print payload
         
             # self.histories.upload_dataset_from_library(library_id, lib_dataset_id ) "not implemented with roles attribut"

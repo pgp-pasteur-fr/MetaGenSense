@@ -12,7 +12,7 @@
   	  <tr class="{% cycle 'row1' 'row2' %}">
   	  	<td>{{forloop.counter}}.</td>
     	<td>{{ file.name }}</td><td class="stat_{{file.status}}"> </td>
- 	  	<td>{%if 'ok' in file.status %}<a title="Export big data in your personal sbw_outputs folder " class=export href="{% url 'galaxy_export_output' file.id %}"{{file.id}}> </a>{% endif %}</td>
+ 	  	<td>{%if 'ok' in file.status %}<a title="Export big data in your personal Galaxy output folder " class=export href="{% url 'galaxy_export_output' file.id %}"{{file.id}}> </a>{% endif %}</td>
   	  	<td>{%if 'ok' in file.status %}<a title="Dowload the file" class=download href="{% url 'galaxy_download_file' file.id %}" > </a>{% endif %}</td>
   	  	<td>{%if 'ok' in file.status %}<a title="Save the file in the database and shared with project group" href="{% url 'galaxy_save_file' file.id %}" class=save ></a>{% endif %}</td>
   	  	<td>{% if messages %}
