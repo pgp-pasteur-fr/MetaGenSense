@@ -27,7 +27,7 @@ Export documentation
    
 
 Project documentation
-====================
+=====================
 
 .. toctree::
    :maxdepth: 2
