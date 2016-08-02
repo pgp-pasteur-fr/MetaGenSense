@@ -1,3 +1,6 @@
+Configuration
+=============
+
 In order to give access to Galaxy from MetaGenSense each user need to:
 
 1. Get the API Key
