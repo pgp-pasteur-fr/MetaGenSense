@@ -23,7 +23,7 @@ This release is coupled with a virtual machin (VM) image configured to directly 
 It is available for download at the URL:
 http://webext.pasteur.fr/metagensense/metagensense.ova
 
-and required [VirtualBox](https://www.virtualbox.org/wiki)
+and requires [VirtualBox](https://www.virtualbox.org/wiki)
 
 
 ### _To use the VM:_
