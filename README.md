@@ -12,18 +12,13 @@ Citation
    Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high     throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1,     http://f1000research.com/articles/4-86/v1 ] F1000Research 2015.
 
 
-To test MetaGenSense
+To test MetaGenSense v1.0
 --------------------
 
-### MetaGenSense v1.0 release
-
-Last version of the source code corresponding to the version described in the publication:http://f1000research.com/articles/4-86/v1
-
-This release is coupled with a virtual machin (VM) image configured to directly test MetaGenSense through a web browser.
-It is available for download at the URL:
+A virtual machin (VM) image configured to directly test MetaGenSense through a web browser is available for download at the URL:
 http://webext.pasteur.fr/metagensense/metagensense.ova
 
-and requires [VirtualBox](https://www.virtualbox.org/wiki)
+It requires [VirtualBox](https://www.virtualbox.org/wiki)
 
 
 ### _To use the VM:_
