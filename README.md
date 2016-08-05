@@ -15,7 +15,7 @@ Citation
 To test MetaGenSense v1.0
 --------------------
 
-A virtual machin (VM) image configured to directly test MetaGenSense through a web browser is available for download at the URL:
+A virtual machine (VM) image configured to directly test MetaGenSense through a web browser is available for download at the URL:
 http://webext.pasteur.fr/metagensense/metagensense.ova
 
 It requires [VirtualBox](https://www.virtualbox.org/wiki)
