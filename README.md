@@ -48,8 +48,7 @@ The user can consult an analysis that was already launched
 
 The Admin User can connect to the admin page of the application: http://metagensense.test.fr:8000/admin/
 
-The user can also connect to Galaxy:  
-localhost:8080 to follow the analysis on the Galaxy side:
+The user can also connect to Galaxy, `localhost:8080` to follow the analysis on the Galaxy side:
 
  - **login**: john.doe@pasteur.fr 
  - **password**: metagensense
@@ -61,9 +60,9 @@ To Install MetaGenSense v1.0
 
 ###Requirements
 
-- python==2.7
-- Django==1.6.2
-- bioblend==0.5.3
+      python==2.7
+      Django==1.6.2
+      bioblend==0.5.3
 
 
 1. virtualenv
