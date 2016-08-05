@@ -13,7 +13,7 @@ Citation
 
 
 To test MetaGenSense v1.0
---------------------
+-------------------------
 
 A virtual machine (VM) image configured to directly test MetaGenSense through a web browser is available for download at the URL:
 http://webext.pasteur.fr/metagensense/metagensense.ova
@@ -32,14 +32,14 @@ It requires [VirtualBox](https://www.virtualbox.org/wiki)
 
 - Open a web browser and go to url: http://metagensense.test.fr:8000
 
-To log; there are 2 accounts:
+To log in there are 2 accounts:
 
 1. User:
- - **login**:jdoe
- - **password**:django
+ - **login**: jdoe
+ - **password**: django
 
 2. Admin User:
- - **login**:mgs_admin
+ - **login**: mgs_admin
  - **password**: admin
 
 The user can start using MetaGenSense as it is described in the [documentation](http://metagensense.readthedocs.io/) to start a bioinformatics analysis. A test fastq file is on the desktop, test.fastq
@@ -56,17 +56,15 @@ localhost:8080 to follow the analysis on the Galaxy side:
 
 
 
+To Install MetaGenSense v1.0
+----------------------------
 
-
-Requirements
-------------
+###Requirements
 
 - python==2.7
 - Django==1.6.2
 - bioblend==0.5.3
 
-Installation
-------------
 
 1. virtualenv
 
