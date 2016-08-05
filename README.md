@@ -11,8 +11,57 @@ Citation
 
    Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high     throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1,     http://f1000research.com/articles/4-86/v1 ] F1000Research 2015.
 
+
 To test MetaGenSense
-----------
+--------------------
+
+### MetaGenSense v1.0 release
+
+Last version of the source code corresponding to the version described in the publication:http://f1000research.com/articles/4-86/v1
+
+This release is coupled with a virtual machin (VM) image configured to directly test MetaGenSense through a web browser.
+It is available for download at the URL:
+http://webext.pasteur.fr/metagensense/metagensense.ova
+
+and required [VirtualBox](https://www.virtualbox.org/wiki)
+
+
+### _To use the VM:_
+
+**login**: galaxy **password**: galaxy
+
+ ==> **The servers are automatically launched.**
+
+
+### _To use MetaGenSense:_
+
+- Open a web browser and go to url: http://metagensense.test.fr:8000
+
+To log; there are 2 accounts:
+
+1. User:
+ - **login**:jdoe
+ - **password**:django
+
+2. Admin User:
+ - **login**:mgs_admin
+ - **password**: admin
+
+The user can start using MetaGenSense as it is described in the [documentation](http://metagensense.readthedocs.io/) to start a bioinformatics analysis. A test fastq file is on the desktop, test.fastq
+
+The user can consult an analysis that was already launched
+
+The Admin User can connect to the admin page of the application: http://metagensense.test.fr:8000/admin/
+
+The user can also connect to Galaxy:  
+localhost:8080 to follow the analysis on the Galaxy side:
+
+ - **login**: john.doe@pasteur.fr 
+ - **password**: metagensense
+
+
+
+
 
 Requirements
 ------------
