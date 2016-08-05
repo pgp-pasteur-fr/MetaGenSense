@@ -1,7 +1,9 @@
 MetaGenSense
 ============
 
-   A web application framework for analysis and visualization of High throughput Sequencing metagenomic data.
+A web application framework for analysis and visualization of High throughput Sequencing metagenomic data.
+
+[![Documentation Status](https://readthedocs.org/projects/metagensense/badge/?version=latest)](http://metagensense.readthedocs.io/en/latest/?badge=latest)
 
 Citation
 --------
