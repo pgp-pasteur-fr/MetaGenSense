@@ -12,8 +12,8 @@ Citation
    Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high     throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1,     http://f1000research.com/articles/4-86/v1 ] F1000Research 2015.
 
 
-To test MetaGenSense v1.0
--------------------------
+To test MetaGenSense v1.0 on a virtual machine
+----------------------------------------------
 
 A virtual machine (VM) image configured to directly test MetaGenSense through a web browser is available for download at the URL:
 http://webext.pasteur.fr/metagensense/metagensense.ova
@@ -55,31 +55,48 @@ The user can also connect to Galaxy, `localhost:8080` to follow the analysis on 
 
 
 
-To Install MetaGenSense v1.0
+To Install MetaGenSense v1.0 on your machine
 ----------------------------
 
 ###Requirements
 
       python==2.7
+      pip==8.1.2
       Django==1.6.2
       bioblend==0.5.3
+     
 
 
 1. virtualenv
 
-    You may use virtualenv to isolate your django project workspace [virtualenv](http://www.virtualenv.org/),
+    You may want to use virtualenv to isolate your django project workspace [virtualenv](http://www.virtualenv.org/),
    [virtualenvwrapper](http://www.doughellmann.com/projects/virtualenvwrapper/)
+   
+   **A.** to install virtualenv
+   ```bash
+      pip install virtualenv
+   ```
+      
+   **B.** to create a virtualenv named venv and activate it
+   ```bash
+      virtualenv venv
+      cd venv
+      . bin/activate
+   ```
 
 2. Download
 
     You need the *MetaGenSense* project files in your workspace:
-
-      - cd /path/to/your/workspace
-      - git clone git://github.com/pgp-pasteur-fr/MetaGenSense.git
+   ```bash
+      cd /path/to/your/workspace
+      git clone git://github.com/pgp-pasteur-fr/MetaGenSense.git
+   ```
 
 3. Requirements installation
 
-   $ pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 4. Set the settings: 
 
@@ -125,14 +142,17 @@ To Install MetaGenSense v1.0
      [DATABASES](https://docs.djangoproject.com/en/1.8/ref/settings/#databases)
      
      Create django models with the command: 
-         - ./manage.py migrate`
+         ```bash
+         ./manage.py migrate`
+         ```
 
    e. Test settings
 
      Starts a lightweight development Web server on the local machine. 
      By default, the server runs on port 8000 on the IP address 127.0.0.1. 
      You can pass in an IP address and port number explicitly.
-         - ./manage.py runserver
-
+         ```bash
+         ./manage.py runserver
+         ```
 
 
