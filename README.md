@@ -15,6 +15,7 @@ Test MetaGenSense on a virtual machine
 --------------------------------------
 
 The **easiest way to test MetaGensense** is with the preconfigured virtual machine we provide. To use it:
+
 1. Make sure [VirtualBox](https://www.virtualbox.org/wiki) is installed on your system
 2. Download the MetaGenSense image at the following URL: http://webext.pasteur.fr/metagensense/metagensense.ova
 3. Open it with Virtualbox. Once the virtual machine has started, the servers are automatically launched
