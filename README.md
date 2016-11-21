@@ -9,7 +9,7 @@ A web application framework for analysis and visualization of High throughput Se
 Citation
 --------
 
-   Correia D, Doppelt-Azeroual O, Denis JB et al. MetaGenSense : A web application for analysis and visualization of high     throughput sequencing metagenomic data [v1; ref status: approved with reservations 2, not approved 1,     http://f1000research.com/articles/4-86/v1 ] F1000Research 2015.
+  Correia D, Doppelt-Azeroual O, Denis JB et al., MetaGenSense: A web-application for analysis and exploration of high throughput sequencing metagenomic data [version 2; referees: 3 approved with reservations, https://f1000research.com/articles/4-86/v2]  F1000Research 2015.
 
 Test MetaGenSense on a virtual machine
 --------------------------------------
